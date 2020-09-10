@@ -4,10 +4,9 @@ const uniqueValidator = require("mongoose-unique-validator");
 const { formatDate } = require("../utils/utils");
 
 const entrySchema = new mongoose.Schema({
-    emotion: { type: String, unique: false, required: true },
-    habitSelected: {type:String, unique: false, required: false},
-    date: {type: Date, unique: true, required: true, default: Date.now},
-    isActive: {type: Boolean, unique: false, required: true, default: true},
+    emotion: { type: String, required: true },
+    habitSelected: {type: mongoose.Schema.Types.ObjectId, ref: "Habit"},
+    date: {type: Date, required: true, default: Date.now},
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
