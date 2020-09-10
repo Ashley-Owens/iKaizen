@@ -1,17 +1,14 @@
-const env = require("../config/environment");
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 const formatDate = require("../utils/formatDate");
 
 const entrySchema = new mongoose.Schema({
-  emotion: { type: String, unique: false, required: true },
-  habitSelected: { type: String, unique: false, required: false },
+  emotions: [{ type: String, required: true }],
   date: { type: Date, unique: true, required: true, default: Date.now },
-  isActive: { type: Boolean, unique: false, required: true, default: true },
+  habitsSelected: [{ type: mongoose.Schema.Types.ObjectId, ref: "Habit" }],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true,
   },
 });
 
