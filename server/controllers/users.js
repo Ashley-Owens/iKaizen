@@ -1,7 +1,5 @@
-const usersRouter = require("express").Router();
+const userRouter = require("express").Router();
 
-// TODO
 
-// Santiago + Sriram
 
 module.exports = usersRouter;
