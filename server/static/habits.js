@@ -1,6 +1,3 @@
 // TODO
-const habits [
-    {
-        
-    }
-]
+
+// Ashley

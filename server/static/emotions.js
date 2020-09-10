@@ -1,9 +1,6 @@
 // TODO
-const emotions = [
-    {name: "", description: ""},
-     
-]
+const emotions = [];
 
+// Ashley
 
 module.exports = emotions;
-module.exports = habits;
