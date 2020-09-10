@@ -7,7 +7,7 @@ const habitSchema = new mongoose.Schema({
   progress: { type: Number, required: true, default:0, min:0, max:100},
   date: { type: Date, default: Date.now },
   isBinary: {type: Boolean, required: true},
-  isArchived: {type: Boolean, required},
+  isArchived: {type: Boolean, required: true},
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
