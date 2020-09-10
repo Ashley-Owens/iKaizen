@@ -3,7 +3,7 @@ const uniqueValidator = require("mongoose-unique-validator");
 const formatDate = require("../utils/formatDate");
 
 const userSchema = new mongoose.Schema({
-  name: { type: String, required },
+  name: { type: String, required: true },
   username: { type: String, required: true, unique: true },
   passwordHash: { type: String, required: true },
   email: { type: String },
