@@ -1,1 +1,6 @@
 // TODO
+const habits [
+    {
+        
+    }
+]
