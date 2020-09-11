@@ -38,4 +38,8 @@ const checkForCredentials = (username, password) => {
 };
 
 module.exports = checkForCredentials;
+<<<<<<< HEAD
 >>>>>>> 17e8c7be1340cb7acbafe0df2914bc974a90da55
+=======
+>>>>>>> origin/ronny
+>>>>>>> a8b8a30ab42bc4d8f871bc6a739bef88367ac629
