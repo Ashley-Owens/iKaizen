@@ -59,6 +59,7 @@ usersRouter.put("/myself",loginRequired,async(req,res)=> {
 });
 
 usersRouter.get("/my/entries",loginRequired,async(req,res)=>{
+<<<<<<< HEAD
     const {year, month, day, view = "weekly"} = req.query;
     const userID = req.user._id;
     const date = new Date();
@@ -168,6 +169,11 @@ usersRouter.post("/logout", loginRequired, async(req, res) => {
     req.logout();
     res.status(200).end();
 });
+=======
+    const {year,month,day}=req.query
+    const user = req.user.Entry
+})
+>>>>>>> origin/sriram
 
 usersRouter.use((err, req, res, next) => {
     return res.status(500).json({
