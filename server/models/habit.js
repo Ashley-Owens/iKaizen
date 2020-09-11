@@ -4,10 +4,17 @@ const formatDate = require("../utils/formatDate");
 
 const habitSchema = new mongoose.Schema({
   name: { type: String, required: true },
+<<<<<<< HEAD
   progress: { type: Number, default:0, min:0, max:100},
   date: { type: Date, default: Date.now },
   isBinary: {type: Boolean, required: true},
   isArchived: {type: Boolean, default: false},
+=======
+  progress: { type: Number, required: true, default: 0, min: 0, max: 100 },
+  date: { type: Date, default: Date.now },
+  isBinary: { type: Boolean, required: true },
+  isArchived: { type: Boolean, required: true },
+>>>>>>> origin/ronny
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
