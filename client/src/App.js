@@ -4,6 +4,7 @@ import {Button} from 'react-bootstrap';
 import NavBar from './components/NavBar';
 import Greeter from './components/Greeter';
 import './App.css';
+import './components/NavBar.css';
 
 function App() {
   return (
@@ -12,8 +13,6 @@ function App() {
       <div>
         <NavBar/>
         <Greeter name="Ashley"/>
-        
-        <Button>Test</Button>
       </div>    
       </header>
     </div>
