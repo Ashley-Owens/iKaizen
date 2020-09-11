@@ -1,14 +1,12 @@
-<<<<<<< HEAD
-const userRouter = require("express").Router();
-=======
 const usersRouter = require("express").Router();
+
 const bcrypt = require("bcrypt");
+const validator = require("validator");
 const loginRequired = require("../middleware/loginRequired");
-const { checkForCredentials } = require("../utils/checkForCredentials")
+const { checkForCredentials } = require("../utils/checkForCredentials");
 const User = require("../models/user");
 const Entry = require("../models/entry")
 const Habit = require("../models/habits")
->>>>>>> origin/sriram
 
 
 
@@ -59,7 +57,50 @@ usersRouter.put("/myself",loginRequired,async(req,res)=> {
 });
 
 usersRouter.get("/my/entries",loginRequired,async(req,res)=>{
-    req.query
+    const {year, month, day, view} = req.query;
+    const userID = req.user._id;
+    const date = new Date();
+    const currentMonth = date.getMonth();
+    const currentYear = date.getFullYear();
+
+
+    //When they don't enter a query:
+    if(Object.keys(req.query).length === 0){
+        return res.status(400).json({error: "No date query entered"});
+    }
+    if(view === "weekly"){
+        var weekEntries = await Entry.find({user: userID, date: {}});
+        res.json(weekEntries);
+    } else if(view === "monthly"){
+        var monthEntries = await Entry.find({user: userID, date: {"$gte": new Date(currentYear, currentMonth, 1), "$lte": date}});
+        res.json(monthEntries);
+    }else {
+        //checking when year or month is not provided:
+        if(!year || !month){
+            res.status(400).json({error: "Invalid date query"});
+        }
+        //case when year and month are provided but not the day
+        else if(!day){
+            var dateFormat = year + "-" + month + "-1";
+            if(validator.isDate(dateFormat[new Date()])){ 
+                var searchEntriesNoDay = await Entry.find({user: userID, date: {"$gte": new Date(year, month, 1), "$lte": date}});
+                res.json(searchEntriesNoDay);
+            }else{
+                res.status(400).json({error: "Invalid date query"});
+            }
+        //case when year, month and day are provided
+        }else {
+            var dateFormat = year + "-" + month + "-" + day;
+            if(validator.isDate(dateFormat[new Date()])){ 
+                var searchEntriesWithDay = await Entry.find({user: userID, date: {"$gte": new Date(year, month, day), "$lte": date}});
+                res.json(searchEntriesWithDay);
+            }else{
+                res.status(400).json({error: "Invalid date query"});
+            }
+        }
+    }
+        
+    }
 })
 
 
