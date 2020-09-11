@@ -1,6 +1,40 @@
-// TODO
-const emotions = [];
+// A list containing the emotions to be tracked with some helpful descriptions for the user.
 
-// Ashley
+const emotions = [
+    {name: "Admiration", description: "amazement, pride"},
+    {name: "Amusement", description: "laughter, humor, smiling"},
+    {name: "Anger", description: "frustration, resentment, contempt, rage"},
+    {name: "Anxiety", description: "fear, nervousness, worry"},
+    {name: "Awe", description: "wonder, amazement, appreciation"},
+    {name: "Awkwardness", description: "embarrassment"},
+    {name: "Boredom", description: "diminished interest"},
+    {name: "Calm", description: "peace, serenity, contentment"},
+    {name: "Compassion", description: "concern for others"},
+    {name: "Confusion", description: "bewilderment"},
+    {name: "Craving", description: "hunger, thirst, sexual desire"},
+    {name: "Disgust", description: "judgement, grossed-out"},
+    {name: "Excitement", description: "adrenaline rush, hopeful"},
+    {name: "Fear", description: "scary, terror"},
+    {name: "Grief", description: "loss, intense sadness"},
+    {name: "Happy", description: "glad, cheerful"},
+    {name: "Horror", description: "shock, fear, disgust"},
+    {name: "Interest", description: "intrigue, amazement, entranced"},
+    {name: "Jealousy", description: "inadequacy, fear over lacking possessions/safety"},
+    {name: "Joyful", description: "delight, elation"},
+    {name: "Loneliness", description: "dejection, gloom, lacking connection"},
+    {name: "Love", description: "caring, connection, warmth, intimacy"},
+    {name: "Neutral", description: "even-keeled"},
+    {name: "Nostalgia", description: "sentimental yearning"},
+    {name: "Melancholy", description: "sorrowful, pensive, gloomy"},
+    {name: "Pain", description: "hurt, empathic concern, affliction, struggle"},
+    {name: "Playful", description: "silly, spirited"},
+    {name: "Relief", description: "comfort, freedom from troubles, solace"},
+    {name: "Regret", description: "remorse, contrition, guilt"},
+    {name: "Romance", description: "infatuation, chemistry, intensity"},
+    {name: "Sadness", description: "disappointment, despair, loss"},
+    {name: "Satisfaction", description: "pleasant, content, pride"},
+    {name: "Stress", description: "pressure, anxiety, fatigue"},
+    {name: "Surprise", description: "astonishment, excitement, startle, shock"}
+];
 
 module.exports = emotions;
