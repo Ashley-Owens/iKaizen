@@ -5,7 +5,7 @@ import NavBar from './components/NavBar';
 import MyModal from './components/MyModal';
 import Greeter from './components/Greeter';
 import './App.css';
-import './components/NavBar.css';
+
 
 function App() {
   const [modalShow, setModalShow] = React.useState(false);
