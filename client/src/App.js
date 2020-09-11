@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import MyModal from './components/MyModal';
 import Greeter from './components/Greeter';
 import './App.css';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -13,23 +14,26 @@ function App() {
     
     <div className="App">
       <header className="App-header">
-      <div>
-          <NavBar/>
-          <>
-          <Button variant="primary" onClick={() => setModalShow(true)}>
-            Launch vertically centered modal
-          </Button>
+      <div id="content">
+        <NavBar/>
+        <>
+        <Button variant="info" onClick={() => setModalShow(true)}>
+          Sign Up
+        </Button>
 
-          <MyModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-        </>
-          <Greeter name="Ashley"/>
-         
-      </div>    
+        <MyModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      </>
+        <Greeter name="Ashley"/>
+        </div>
       </header>
-    </div>
+      
+       
+        <Footer />
+          
+      </div>
   );
 }
 

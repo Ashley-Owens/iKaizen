@@ -50,7 +50,7 @@ function MyModal(props) {
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <button type="button" class="btn btn-info" onClick={props.onHide}>Submit</button>
+          <Button variant="info" onClick={props.onHide}>Submit</Button>
         </Modal.Footer>
       </Modal>
     );
