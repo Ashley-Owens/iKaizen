@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button} from 'react-bootstrap';
 import NavBar from './components/NavBar';
 import Greeter from './components/Greeter';
 import './App.css';
-=======
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
->>>>>>> origin/ronny
 
 function App() {
   return (
