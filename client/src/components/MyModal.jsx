@@ -1,32 +1,56 @@
 import React from 'react';
-import {Modal, Button} from 'react-bootstrap'
-
+import {Modal, Button, Form, Col} from 'react-bootstrap'
+import './MyModal.css'
 
 function MyModal(props) {
     return (
       <Modal
         {...props}
+        className="my-modal"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Log In
+            Account Sign Up
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Name</h4>
-          <h4>Email</h4>
-          <h4>User Name</h4>
-          <h4>Password</h4>
+          <Form>
+          <Form.Group controlId="formGroupName">
+            <Form.Label>Name</Form.Label>
+            <Form.Row>
+              <Col>
+                <Form.Control placeholder="First name" />
+              </Col>
+              <Col>
+                <Form.Control placeholder="Last name" />
+              </Col>
+            </Form.Row>
+          </Form.Group>
+          <Form.Group controlId="formGroupUsername">
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="username" placeholder="Enter username" />
+          </Form.Group>
+            <Form.Row>
+            <Form.Group as={Col} controlId="formGridEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" />
+            </Form.Group>
+            <Form.Group as={Col} controlId="formGridPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+          </Form.Row>
+        </Form>
           
           <p>
-            If you don't have an account yet, please sign up here.
+            If you already have an account, please log in <a href="#login modal">here</a>.
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
+          <button type="button" class="btn btn-info" onClick={props.onHide}>Submit</button>
         </Modal.Footer>
       </Modal>
     );

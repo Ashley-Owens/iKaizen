@@ -14,18 +14,19 @@ function App() {
     <div className="App">
       <header className="App-header">
       <div>
-        <NavBar/>
-        <>
-        <Button variant="primary" onClick={() => setModalShow(true)}>
-          Launch vertically centered modal
-        </Button>
-  
-        <MyModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      </>
-        <Greeter name="Ashley"/>
+          <NavBar/>
+          <>
+          <Button variant="primary" onClick={() => setModalShow(true)}>
+            Launch vertically centered modal
+          </Button>
+
+          <MyModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        </>
+          <Greeter name="Ashley"/>
+         
       </div>    
       </header>
     </div>
