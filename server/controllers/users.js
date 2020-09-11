@@ -55,7 +55,8 @@ usersRouter.put("/myself",loginRequired,async(req,res)=> {
 });
 
 usersRouter.get("/my/entries",loginRequired,async(req,res)=>{
-    req.query
+    const {year,month,day}=req.query
+    const user = req.user.Entry
 })
 
 
