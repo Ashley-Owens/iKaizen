@@ -1,16 +1,12 @@
 const usersRouter = require("express").Router();
-
 const bcrypt = require("bcrypt");
 const validator = require("validator");
+const passport = require("passport");
 const loginRequired = require("../middleware/loginRequired");
-const { checkForCredentials } = require("../utils/checkForCredentials");
+const checkForCredentials = require("../utils/checkForCredentials");
 const User = require("../models/user");
 const Entry = require("../models/entry");
-const Habit = require("../models/habits");
-
-/* --------------------------------------------
-        REMEMBER TO NPM INSTALL VALIDATOR
-    ------------------------------------------- */
+const Habit = require("../models/habit");
 
 usersRouter.post("/", async (req, res) => {
   const { username, password, email, firstName, lastName } = req.body;
@@ -24,41 +20,57 @@ usersRouter.post("/", async (req, res) => {
   }
 
   const passwordHash = await bcrypt.hash(password, 14);
-  const newUser = await User.create({
-    firstName,
-    lastName,
-    username,
-    passwordHash,
-    email,
-  });
+
+  try {
+    var newUser = await User.create({
+      firstName,
+      lastName,
+      username,
+      passwordHash,
+      email,
+    });
+  } catch (error) {
+    res.status(400).json({ error: "malformed request body" });
+  }
 
   res.status(201).json(newUser);
 });
 
 usersRouter.put("/myself", loginRequired, async (req, res) => {
-  const updateUser = req.user._id;
-  let editables = {};
-  switch (req.body) {
-    case req.body.username:
-      editables.username = req.body.username;
-    case req.body.firstName:
-      editables.firstName = req.body.firstName;
-    case req.body.lastName:
-      editables.lastName = req.body.lastName;
-    case req.body.email:
-      editables.email = req.body.email;
-    case req.body.password: {
-      const passwordHash = await bcrypt.hash(req.body.password, 14);
-      editables.password = passwordHash;
+  const userEdit = {};
+  const fields = [
+    "username",
+    "firstName",
+    "lastName",
+    "email",
+    "password",
+    "appleId",
+  ];
+
+  for (let field of fields) {
+    if (req.body[field]) {
+      if (field === "password") {
+        const passwordHash = await bcrypt.hash(req.body.password, 14);
+        userEdit.passwordHash = passwordHash;
+      } else {
+        userEdit[field] = req.body[field];
+      }
     }
-    default:
-      break;
   }
-  if (editables.length === 0) {
-    return res.status(204).end();
-  } else {
-    User.findByIdAndUpdate(updateUser, editables);
+
+  if (Object.keys(userEdit).length === 0) {
+    return res.status(400).json({ error: "No required fields were provided" });
   }
+
+  try {
+    await User.findByIdAndUpdate(req.user._id, userEdit);
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ error: "At least one edit field is invalid" });
+  }
+
+  return res.status(204).end();
 });
 
 usersRouter.get("/my/entries", loginRequired, async (req, res) => {
@@ -132,7 +144,7 @@ usersRouter.get("/my/entries", loginRequired, async (req, res) => {
   }
 });
 
-usersRouter.post("/my/habit", loginRequired, async (req, res) => {
+usersRouter.post("/my/habits", loginRequired, async (req, res) => {
   var isRecurring = true;
   if (req.query.isLongTerm != "true" && req.query.isLongTerm != "false") {
     //testing if they pass isLongTerm and it is valid
@@ -159,14 +171,23 @@ usersRouter.post("/my/habit", loginRequired, async (req, res) => {
       }
     }
   }
+
+  console.log(habit);
+
   try {
     if (!isRecurring) {
       var newHabit = await Habit.create(habit);
       const habitID = newHabit._id;
       req.user.longTermHabits.push(habitID);
+
+      await req.user.save();
+
+      return res.status(201).json(newHabit);
     } else {
       //is reaccuring
       req.user.reoccurringHabits.set(habit.name, habit.isBinary);
+
+      await req.user.save();
     }
   } catch (error) {
     return res.status(400).json({ error: "Malformed request" });
@@ -178,9 +199,18 @@ usersRouter.post("/login", passport.authenticate("local"), async (req, res) => {
   res.status(200).end();
 });
 
-usersRouter.post("/logout", loginRequired, async (req, res) => {
+usersRouter.post("/logout", async (req, res) => {
   req.logout();
   res.status(200).end();
+});
+
+usersRouter.get("/my/session", (req, res) => {
+  // if a req.user object exists, then the client sent a valid session ID
+  if (req.user) {
+    return res.json({ authenticated: true });
+  }
+
+  res.json({ authenticated: false });
 });
 
 usersRouter.use((err, req, res, next) => {

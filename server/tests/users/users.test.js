@@ -20,15 +20,15 @@ afterAll(async () => {
 });
 
 const checkUserCount = async (newUser, shouldIncrease) => {
-  const usersInDb = await helper.usersInDb();
+  const usersInDb = (await helper.usersInDb()).map((user) => user.toJSON());
   const initialLength = helper.users().length;
 
   if (shouldIncrease) {
-    expect(usersInDb).toContainEqual(expect.objectContaining(newUser));
+    expect(usersInDb).toContainEqual(newUser);
     expect(usersInDb).toHaveLength(initialLength + 1);
   } else {
     if (newUser) {
-      expect(usersInDb).not.toContainEqual(expect.objectContaining(newUser));
+      expect(usersInDb).not.toContainEqual(newUser);
     }
     expect(usersInDb).toHaveLength(initialLength);
   }
@@ -43,19 +43,15 @@ describe("creating users", () => {
       password: "mypassword",
     };
 
-    const response = await helper.createUser(api, user, 201);
-    const newUser = response.body;
+    const newUser = await helper.createUser(api, user, 201);
 
-    await checkUserCount(
-      { firstName: newUser.firstName, newUser: user.lastName },
-      true
-    );
+    await checkUserCount(newUser, true);
   });
 
   test("fails with status code 400 when one of the required properties is missing", async () => {
     // provide a user with no properties
-    let response = await helper.createUser(api, {}, 400);
-    expect(response.body.error).toBeDefined();
+    let responseBody = await helper.createUser(api, {}, 400);
+    expect(responseBody.error).toBeDefined();
 
     const user = {
       firstName: "first",
@@ -70,21 +66,23 @@ describe("creating users", () => {
       const userCopy = { ...user };
       delete userCopy[property];
 
-      response = await helper.createUser(api, userCopy, 400);
-      expect(response.body.error).toBeDefined();
+      responseBody = await helper.createUser(api, userCopy, 400);
+      expect(responseBody.error).toBeDefined();
     }
   });
 
   test("fails with status code 400 when the username is not unique", async () => {
     const existingUser = helper.user();
 
-    response = await helper.createUser(api, existingUser, 400);
-    expect(response.body.error).toBeDefined();
+    responseBody = await helper.createUser(api, existingUser, 400);
+    expect(responseBody.error).toBeDefined();
   });
 });
 
 describe("editing users", () => {
   test("works when the request is valid and the user is logged in", async () => {
+    jest.setTimeout(30000);
+
     const user = helper.user();
     const sessionId = await helper.login(api, user.username, user.password);
 
@@ -103,6 +101,7 @@ describe("editing users", () => {
       for (let j = i; j < properties.length; j++) {
         property = properties[j];
         value = edits[property];
+        editCombination[property] = value;
 
         await helper.editUser(api, sessionId, editCombination, 204);
 
@@ -125,8 +124,13 @@ describe("editing users", () => {
     const user = helper.user();
     const sessionId = await helper.login(api, user.username, user.password);
 
-    const response = await helper.editUser(api, sessionId, invalidEdit, 400);
-    expect(response.body.error).toBeDefined();
+    const responseBody = await helper.editUser(
+      api,
+      sessionId,
+      invalidEdit,
+      400
+    );
+    expect(responseBody.error).toBeDefined();
   });
 
   test("fails with status code 401 if the user is not logged in", async () => {
@@ -137,8 +141,8 @@ describe("editing users", () => {
       appleId: "abcde",
     };
 
-    const response = await helper.editUser(api, null, userEdit, 401);
-    expect(response.body.error).toBeDefined();
+    const responseBody = await helper.editUser(api, null, userEdit, 401);
+    expect(responseBody.error).toBeDefined();
   });
 });
 
@@ -156,28 +160,21 @@ describe("user login", () => {
   });
 
   test("fails with status code 401 if the user does not provide valid credentials", async () => {
-    const response = await api
+    await api
       .post("/api/users/login")
       .send({ username: "invalid", password: "superinvalid" })
       .expect(401);
-    expect(response.body.error).toBeDefined();
   });
 
   test("fails with status code 400 if either the 'username' or 'password' property is not provided", async () => {
-    let response = await api
-      .post("/api/users/login")
-      .send({ username: "user" })
-      .expect(400);
-    expect(response.body.error).toBeDefined();
+    await api.post("/api/users/login").send({ username: "user" }).expect(400);
 
-    response = await api
+    await api
       .post("/api/users/login")
       .send({ password: "testuser" })
       .expect(400);
-    expect(response.body.error).toBeDefined();
 
-    response = await api.post("/api/users/login").expect(400);
-    expect(response.body.error).toBeDefined();
+    await api.post("/api/users/login").expect(400);
   });
 });
 

@@ -80,7 +80,7 @@ const login = async (api, username, password) => {
 };
 
 const logout = async (api, sessionId) => {
-  const request = api.get("/api/users/logout");
+  const request = api.post("/api/users/logout");
 
   if (sessionId) {
     request.set("Cookie", `connect.sid=${sessionId}`);
@@ -114,18 +114,18 @@ const editUser = async (api, sessionId, userEdit, statusCode) => {
   return (await request).body;
 };
 
-// const checkSession = async (api, sessionId) => {
-//   const request = api.get("/api/sessions");
+const checkSession = async (api, sessionId) => {
+  const request = api.get("/api/users/my/session");
 
-//   if (sessionId) {
-//     request.set("Cookie", `connect.sid=${sessionId}`);
-//   }
+  if (sessionId) {
+    request.set("Cookie", `connect.sid=${sessionId}`);
+  }
 
-//   const response = await request.expect(200);
-//   const { authenticated } = response.body;
+  const response = await request.expect(200);
+  const { authenticated } = response.body;
 
-//   return authenticated;
-// };
+  return authenticated;
+};
 
 // const getUserBlogs = async (api, statusCode, sessionId) => {
 //   const request = api.get("/api/users/my/blogs");
@@ -151,7 +151,7 @@ module.exports = {
   parseCookie,
   login,
   logout,
-  //   checkSession,
+  checkSession,
   //   getUserBlogs,
   nonExistentId,
   createUser,
