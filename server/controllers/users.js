@@ -169,6 +169,11 @@ usersRouter.post("/logout", loginRequired, async(req, res) => {
     res.status(200).end();
 });
 
+usersRouter.use((err, req, res, next) => {
+    return res.status(500).json({
+      error: "an error occurred on the server ",
+    });
+  })
 
 
 module.exports = usersRouter;
