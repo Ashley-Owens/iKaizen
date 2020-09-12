@@ -6,10 +6,9 @@ import {
   Link
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container, Modal, Button} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
-import Greeter from './components/Greeter';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import About from './components/About';
@@ -41,7 +40,6 @@ export default function App() {
         </Route>
       </Switch>
       <Footer />
-      
   </Router>
   );
 }
@@ -49,10 +47,14 @@ export default function App() {
 
 function Home() {
   return (
-    <Container fluid>
-      <p className="header-text">Home Page</p>
+   
+    <div className="cover">
+        <p className="logo">iKaizen</p>
+        <p className="text">iKaizen</p>
+    </div>
+      
 
 
-    </Container>
+    
   )
 }
