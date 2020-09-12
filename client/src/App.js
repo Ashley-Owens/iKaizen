@@ -10,39 +10,39 @@ import {Modal, Button} from 'react-bootstrap';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import Greeter from './components/Greeter';
-import './App.css';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import About from './components/About';
 import LogIn from './components/LogIn';
+import './App.css';
 
 
 export default function App() {
-  const [modalShow, setModalShow] = React.useState(false);
   
   return (
     <Router>
-    <div className="Container">
       <NavBar/>
       <Switch>
-        <Route path="/SignUp">
+        <Route path="/SignUp" exact>
           <SignUp />
         </Route>
-        <Route path="/LogIn">
+        <Route path="/LogIn" exact>
           <LogIn />
         </Route>
-        <Route path="/about">
+        <Route path="/about" exact>
           <About />
         </Route>
         {/* Dashboard needs to be Protected */}
-        <Route path="/Dashboard">
+        <Route path="/Dashboard" exact>
           <Dashboard /> 
         </Route>
-        <Route path="/">
+        <Route path="/" exact>
           <Home />
         </Route>
       </Switch>
-      </div>
+      <footer className="footer">
+          <Footer />
+        </footer>
   </Router>
   );
 }
@@ -52,9 +52,6 @@ function Home() {
   return (
     <div>
       <h4>I'm the Home Page</h4>
-      <footer id="content">
-          <Footer />
-        </footer>
     </div>
   )
 }

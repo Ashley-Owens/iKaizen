@@ -7,24 +7,21 @@ function NavBar() {
     return (
         
         <Navbar bg="dark" variant="dark">
+            {/* Left aligned items */}
             <Nav className="mr-auto">
             <Nav.Link href="./">Home</Nav.Link>
             <Nav.Link href="./About">About</Nav.Link>
             <Nav.Link href="./Dashboard">Dashboard</Nav.Link>
-
-            {/* Trying to right align this item */}
-            <div className="justify-content-end">
-                <Nav.Link href="./LogIn">Log In</Nav.Link>
-            </div>
-            
-            {/* <Navbar.Brand href="#home">iKaizen</Navbar.Brand> */}
             </Nav>
-            <Form inline>
-            <Form className="mr-sm-2"/>
-            <Nav.Link href="./SignUp">
-                <Button variant="outline-info">Sign Up</Button>
-            </Nav.Link>
-            </Form>
+            
+            <Nav>
+            {/* Right-aligned items */}
+                <Nav.Link href="./LogIn">
+                <Button variant="outline-info">Log In</Button></Nav.Link>
+                <Nav.Link href="./SignUp">
+                    <Button variant="outline-info">Sign Up</Button>
+                </Nav.Link>
+            </Nav>
         </Navbar>
     )
 }

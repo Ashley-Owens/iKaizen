@@ -1,8 +1,8 @@
 .container {
   /* For a responsive height use vh = viewport height */
   /* background-color: #282c34; */
-  background-image: url(./img/colorfulBg.jpg);
-  height: 70vh; 
+  /* background-image: url(./img/colorfulBg.jpg); */
+  /* height: 70vh;  */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,12 +12,10 @@
   width: 30rem;
 }  
 
-#content {
+.footer {
+  background-color: #ffffff;
   padding-top: 70vh;
   min-height: "calc(100vh - 92px)";
-}
-
-footer {
   text-align: center;
   border-radius: 0 !important;
   border-bottom: 0;
@@ -37,5 +35,11 @@ footer {
   background-color: #343a40;
   color: #ffffff;
   /* color: #17a2b8; */
+}
+
+.header-text {
+  font-size: 2rem;
+  color: #02899C;
+  text-align: center;
 }
 
