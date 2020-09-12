@@ -18,7 +18,7 @@ mongoose.connect(env.MONGODB_URI, {
   useCreateIndex: true,
 });
 
-const port = env.PORT || 3000;
+app.set("port", env.PORT || 3000);
 
 // parse incoming request bodies formatted in JSON
 app.use(express.json());
@@ -51,6 +51,4 @@ app.use("/api/users", usersRouter);
 app.use("/api/entries", entriesRouter);
 app.use("/api/habits", habitsRouter);
 
-app.listen(port, () => {
-  console.log(`Serving application on port ${port}`);
-});
+module.exports = app;
