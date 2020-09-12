@@ -9,7 +9,7 @@ const { request } = require("express");
 
 //Editing Habit by ID
 habitsRouter.put("/:id",loginRequired, async (req, res) => {
-    const ID = req.params.id;
+    const id = req.params.id;
     //Case 1
     try{
     var habit = await Habit.findById(id);
@@ -45,6 +45,7 @@ habitsRouter.put("/:id",loginRequired, async (req, res) => {
     res.status(204).end();
 });
 
+//deleting habit by ID
 habitsRouter.delete("/:id",loginRequired, async (req, res) => {
     const ID = req.params.id;
     //Case 1
