@@ -36,6 +36,8 @@ const checkUserCount = async (newUser, shouldIncrease) => {
 
 describe("creating users", () => {
   test("works correctly when the required properties are provided", async () => {
+    jest.setTimeout(10000);
+
     const user = {
       firstName: "first",
       lastName: "last",
