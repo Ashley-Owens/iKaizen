@@ -13,10 +13,10 @@ const entrySchema = new mongoose.Schema({
 });
 
 entrySchema.set("toJSON", {
-  transform: (document, returnedObect) => {
-    returnedObect.id = returnedObject._id.toString();
-    delete returnedObect._id;
-    delete returnedObect.__v;
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
 
     returnedObject.date = formatDate(returnedObject.date);
   },
