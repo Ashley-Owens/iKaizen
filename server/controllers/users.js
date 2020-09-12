@@ -73,67 +73,13 @@ usersRouter.put("/myself", loginRequired, async (req, res) => {
   return res.status(204).end();
 });
 
-<<<<<<< HEAD
-usersRouter.get("/my/entries",loginRequired,async(req,res)=>{
-    const {year, month, day, view = "weekly"} = req.query;
-    const userID = req.user._id;
-=======
 usersRouter.get("/my/entries", loginRequired, async (req, res) => {
   console.log(req.query);
->>>>>>> origin/ronny
 
   if (Object.keys(req.query).length === 0) {
     return res.status(400).json({ error: "No date query entered" });
   }
 
-<<<<<<< HEAD
-    //When they don't enter a query:
-    if(Object.keys(req.query).length === 0){
-        return res.status(400).json({error: "No date query entered"});
-    }
-    try{
-        if(view === "weekly"){
-            const firstDayofWeek = new Date();
-            const lastDayofWeek = new Date();
-            const firstDayofWeekOffset = (24*60*60*1000) * firstDayofWeek.currentDay(); 
-            const lastDayofWeekOffset = (24*60*60*1000) * (6 - firstDayofWeek.currentDay()); 
-            firstDayofWeek.setTime(firstDayofWeek.getTime() - firstDayofWeekOffset);
-            lastDayofWeek.setTime(lastDayofWeek.getTime() + lastDayofWeekOffset);
-    
-            var weekEntries = await Entry.find({user: userID, date: {"$gte": firstDayofWeek, "$lte": lastDayofWeek}});
-            res.json(weekEntries);
-        } else if(view === "monthly"){
-            const date = new Date();
-            const currentMonth = date.getMonth();
-            const currentYear = date.getFullYear();
-
-            var monthEntries = await Entry.find({user: userID, date: {"$gte": new Date(currentYear, currentMonth, 1), "$lte": date}});
-            res.json(monthEntries);
-        }else {
-            //checking when year or month is not provided:
-            if(!year || !month){
-                res.status(400).json({error: "Invalid date query"});
-            }
-            //case when year and month are provided but not the day
-            else if(!day){
-                var dateFormat = year + "-" + month + "-1";
-                if(validator.isDate(dateFormat[new Date()])){ 
-                    var searchEntriesNoDay = await Entry.find({user: userID, date: {"$gte": new Date(year, month, 1), "$lte": date}});
-                    res.json(searchEntriesNoDay);
-                }else{
-                    res.status(400).json({error: "Invalid date query"});
-                }
-            //case when year, month and day are provided
-            }else {
-                var dateFormat = year + "-" + month + "-" + day;
-                if(validator.isDate(dateFormat[new Date()])){ 
-                    var searchEntriesWithDay = await Entry.find({user: userID, date: {"$gte": new Date(year, month, day), "$lte": date}});
-                    res.json(searchEntriesWithDay);
-                }else{
-                    res.status(400).json({error: "Invalid date query"});
-                }
-            }
-=======
   const { year, month, day, view = "weekly" } = req.query;
 
   if (!year && !month) {
@@ -185,7 +131,6 @@ usersRouter.get("/my/entries", loginRequired, async (req, res) => {
           res.json(searchEntriesNoDay);
         } else {
           res.status(400).json({ error: "Invalid date query" });
->>>>>>> origin/ronny
         }
         //case when year, month and day are provided
       } else {
