@@ -43,8 +43,7 @@ function MyModal(props) {
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
           </Form.Row>
-        </Form>
-          
+        </Form>  
           <p>
             If you already have an account, please log in <a href="#login modal">here</a>.
           </p>

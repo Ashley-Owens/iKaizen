@@ -1,6 +1,6 @@
 #content {
     padding-top: 70px;
-    min-height: ~"calc(100vh - 92px)";
+    min-height: "calc(100vh - 92px)";
   }
   
 footer {
@@ -12,5 +12,5 @@ footer {
     .copyright {
         padding-top: @padding-small-horizontal / 2;
         padding-bottom: @padding-small-horizontal;
-}
+    }
 }

@@ -6,95 +6,53 @@ import {
   Link
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button} from 'react-bootstrap';
+import {Modal, Button} from 'react-bootstrap';
 import NavBar from './components/NavBar';
-import MyModal from './components/MyModal';
 import Greeter from './components/Greeter';
 import './App.css';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import About from './components/About';
+import MyModal from './components/MyModal';
 
 
 export default function App() {
   const [modalShow, setModalShow] = React.useState(false);
   
-  
   return (
     <Router>
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="Dashboard">Dashboard</Link>
-          </li>
-        </ul>
-      </nav>
-
-      {/* A <Switch> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
-      <Switch>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/Dashboard">
-          <Dashboard />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
+    <div className="App">
+      <div id="content">
+        <NavBar/>
+        <Switch>
+          <Route path="/MyModal">
+            <MyModal />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+          {/* Dashboard needs to be Protected
+          <Route path="/Dashboard">
+            <Dashboard />  */}
+        </Switch>
+      </div>
+      <body>
+        <div class="container zone"><img class="cover" src="./img/undraw.png"></img>
+        </div>
+          <Button variant="info" to="./MyModal" onClick={() => setModalShow(true)}>Sign Up</Button>
+          <MyModal show={modalShow} onHide={() => setModalShow(false)}/>
+        {/* </div> */}
+      </body>
+      <Footer />
     </div>
   </Router>
-    
-    
-    // <Router>
-    // <div className="App">
-    //   <header className="App-header">
-    //   <div id="content">
-    //     <NavBar/>
-    //     <>
-    //     <Button variant="info" onClick={() => setModalShow(true)}>
-    //       Sign Up
-    //     </Button>
-
-    //     <MyModal
-    //       show={modalShow}
-    //       onHide={() => setModalShow(false)}
-    //     />
-    //   </>
-    //     <Greeter name="Ashley"/>
-    //     {/* A <Switch> looks through its children <Route>s and
-    //         renders the first one that matches the current URL. */}
-    //     <Switch>
-    //       <Route path="components/about">
-    //         <About />
-    //       </Route>
-    //       <Route path="components/Dashboard">
-    //         <Dashboard />
-    //       </Route>
-    //       <Route path="/">
-    //         <Home />
-    //       </Route>
-    //     </Switch>
-    //     </div>
-    //   </header>
-       
-    //     <Footer />
-    //   </div>
-    // </Router>
   );
 }
 
 
-    
-
 function Home() {
-  return <h2>I'm the Home page</h2>;
+  return <h3>I'm the Home page</h3>;
 }

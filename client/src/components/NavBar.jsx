@@ -1,17 +1,20 @@
 import React from 'react';
 import {Navbar, Nav, Form, Button} from 'react-bootstrap';
+import MyModal from './MyModal';
 import './NavBar.css';
-import './About';
 
 
 function NavBar() {
+    const [modalShow, setModalShow] = React.useState(false);
+
     return (
         
         <Navbar bg="dark" variant="dark">
             <Nav className="mr-auto">
             <Nav.Link href="./">Home</Nav.Link>
             <Nav.Link href="./About">About</Nav.Link>
-            <Nav.Link href="./MyModal">Sign Up</Nav.Link>
+            <Nav.Link href="./MyModal" onClick={() => setModalShow(true)}>Log In</Nav.Link>
+            <MyModal show={modalShow} onHide={() => setModalShow(false)}/>
             {/* <Navbar.Brand href="#home">iKaizen</Navbar.Brand> */}
             </Nav>
             <Form inline>
@@ -19,7 +22,7 @@ function NavBar() {
             <Button variant="outline-info">Search</Button>
             </Form>
         </Navbar>
-       
     )
 }
+
 export default NavBar;

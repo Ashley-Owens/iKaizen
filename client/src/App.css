@@ -1,4 +1,4 @@
-.App-header {
+.App-body {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -7,4 +7,13 @@
   /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.container {
+  /* For a standard set height use px, responsive height use vh = viewport height */
+  background-color: #282c34;
+  height: 70vh; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

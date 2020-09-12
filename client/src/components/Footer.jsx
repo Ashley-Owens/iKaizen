@@ -9,7 +9,7 @@ function Footer () {
                 <Nav justified>
                 <NavItem
                     eventKey={1}>
-                    Privacy policy
+                    Privacy Policy
                 </NavItem>
                 <NavItem
                     eventKey={2}
@@ -18,10 +18,9 @@ function Footer () {
                 </NavItem>
                 <NavItem
                     eventKey={3}>
-                    Some other professional link
+                    Contact US
                 </NavItem>
                 </Nav>
-
                 <div className="text-center small copyright">
                 © iKaizen 2020
                 </div>
