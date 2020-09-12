@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Modal, Button} from 'react-bootstrap';
+import {Container, Modal, Button} from 'react-bootstrap';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import Greeter from './components/Greeter';
@@ -40,9 +40,8 @@ export default function App() {
           <Home />
         </Route>
       </Switch>
-      <footer className="footer">
-          <Footer />
-        </footer>
+      <Footer />
+      
   </Router>
   );
 }
@@ -50,8 +49,10 @@ export default function App() {
 
 function Home() {
   return (
-    <div>
-      <h4>I'm the Home Page</h4>
-    </div>
+    <Container fluid>
+      <p className="header-text">Home Page</p>
+
+
+    </Container>
   )
 }

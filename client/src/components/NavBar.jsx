@@ -9,7 +9,7 @@ function NavBar() {
         <Navbar bg="dark" variant="dark">
             {/* Left aligned items */}
             <Nav className="mr-auto">
-            <Nav.Link href="./">Home</Nav.Link>
+            <Navbar.Brand href="./">iKaizen</Navbar.Brand>
             <Nav.Link href="./About">About</Nav.Link>
             <Nav.Link href="./Dashboard">Dashboard</Nav.Link>
             </Nav>
@@ -19,7 +19,7 @@ function NavBar() {
                 <Nav.Link href="./LogIn">
                 <Button variant="outline-info">Log In</Button></Nav.Link>
                 <Nav.Link href="./SignUp">
-                    <Button variant="outline-info">Sign Up</Button>
+                    <Button variant="info">Sign Up</Button>
                 </Nav.Link>
             </Nav>
         </Navbar>
