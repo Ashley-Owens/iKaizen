@@ -6,7 +6,9 @@ const User = require("../models/user");
 const Habit = require("../models/habit");
 const Entry = require("../models/entry");
 
-//get an entry
+/*
+    Route to get an entry by ID
+*/
 entriesRouter.get("/:id", loginRequired, async(req, res) => {
     const id = req.params.id;
 
@@ -25,6 +27,9 @@ entriesRouter.get("/:id", loginRequired, async(req, res) => {
     res.status(200).end();
 });
 
+/*
+    Route to create and entry
+*/
 entriesRouter.post("/", loginRequired, async(req, res) => {
     const {emotions, habitSelected, date} = req.body;
     const newEntry;
@@ -62,6 +67,9 @@ entriesRouter.post("/", loginRequired, async(req, res) => {
     }
 });
 
+/*
+    Route to edit an entry by id
+*/
 entriesRouter.put("/:id", loginRequired, async(req, res) => {
     const id = req.params.id;
     const emotions = req.body.emotions;
@@ -100,6 +108,9 @@ entriesRouter.put("/:id", loginRequired, async(req, res) => {
     res.status(204).end();
 });
 
+/*
+    Route to delete an entry by id
+*/
 entriesRouter.delete("/:id", loginRequired, async(req, res) => {
     const id = req.params.id;
     try{
@@ -128,7 +139,9 @@ entriesRouter.delete("/:id", loginRequired, async(req, res) => {
     res.status(204).end();
 });
 
-//route to create a habit for a specific entry (as oppossed to at the user level)
+/*
+    Route to create a habit for a specific entry (as oppossed to at the user level)
+*/
 entriesRouter.post("/:id", loginRequired, async(req, res) => {
     const id = req.params.id;
     try{
