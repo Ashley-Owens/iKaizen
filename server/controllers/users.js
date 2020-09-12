@@ -59,14 +59,8 @@ usersRouter.put("/myself",loginRequired,async(req,res)=> {
 });
 
 usersRouter.get("/my/entries",loginRequired,async(req,res)=>{
-<<<<<<< HEAD
     const {year, month, day, view = "weekly"} = req.query;
     const userID = req.user._id;
-    const date = new Date();
-    const currentDay = date.getDay(); //day of the week
-    const currentDate = date.getDate(); //current day of the date
-    const currentMonth = date.getMonth();
-    const currentYear = date.getFullYear();
 
 
     //When they don't enter a query:
@@ -85,6 +79,10 @@ usersRouter.get("/my/entries",loginRequired,async(req,res)=>{
             var weekEntries = await Entry.find({user: userID, date: {"$gte": firstDayofWeek, "$lte": lastDayofWeek}});
             res.json(weekEntries);
         } else if(view === "monthly"){
+            const date = new Date();
+            const currentMonth = date.getMonth();
+            const currentYear = date.getFullYear();
+
             var monthEntries = await Entry.find({user: userID, date: {"$gte": new Date(currentYear, currentMonth, 1), "$lte": date}});
             res.json(monthEntries);
         }else {
@@ -169,11 +167,6 @@ usersRouter.post("/logout", loginRequired, async(req, res) => {
     req.logout();
     res.status(200).end();
 });
-=======
-    const {year,month,day}=req.query
-    const user = req.user.Entry
-})
->>>>>>> origin/sriram
 
 usersRouter.use((err, req, res, next) => {
     return res.status(500).json({

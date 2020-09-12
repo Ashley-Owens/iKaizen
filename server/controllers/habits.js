@@ -42,7 +42,7 @@ habitsRouter.put("/:id",loginRequired, async (req, res) => {
     catch(error){
         return res.status(400).json({error: "Malformed request"});
     }
-res.status(204).end();
+    res.status(204).end();
 });
 
 habitsRouter.delete("/:id",loginRequired, async (req, res) => {
