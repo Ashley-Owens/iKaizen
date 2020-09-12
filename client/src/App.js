@@ -1,35 +1,60 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import NavBar from './components/NavBar';
-import MyModal from './components/MyModal';
-import Greeter from './components/Greeter';
+import SignUp from './components/SignUp';
+import Footer from './components/Footer';
+import Dashboard from './components/Dashboard';
+import About from './components/About';
+import LogIn from './components/LogIn';
 import './App.css';
 
 
-function App() {
-  const [modalShow, setModalShow] = React.useState(false);
-  return (
-    
-    <div className="App">
-      <header className="App-header">
-      <div>
-        <NavBar/>
-        <>
-        <Button variant="primary" onClick={() => setModalShow(true)}>
-          Launch vertically centered modal
-        </Button>
+export default function App() {
   
-        <MyModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
-      </>
-        <Greeter name="Ashley"/>
-      </div>    
-      </header>
-    </div>
+  return (
+    <Router>
+      <NavBar/>
+      <Switch>
+        <Route path="/SignUp" exact>
+          <SignUp />
+        </Route>
+        <Route path="/LogIn" exact>
+          <LogIn />
+        </Route>
+        <Route path="/about" exact>
+          <About />
+        </Route>
+        {/* Dashboard needs to be Protected */}
+        <Route path="/Dashboard" exact>
+          <Dashboard /> 
+        </Route>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+      </Switch>
+      <Footer />
+  </Router>
   );
 }
 
-export default App;
+
+function Home() {
+  return (
+   
+    <div className="cover">
+        <p className="logo">iKaizen</p>
+        <p className="text">iKaizen</p>
+    </div>
+      
+
+
+    
+  )
+}

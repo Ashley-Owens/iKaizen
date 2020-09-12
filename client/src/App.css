@@ -1,0 +1,50 @@
+<<<<<<< HEAD
+=======
+.container {
+  /* background-color: #282c34; */
+  height: 70vh; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.modal-backdrop {
+  background-color: black;
+}
+
+.my-modal .modal-content {
+  background-color: #343a40; 
+  color: #ffffff;
+  /* color: #17a2b8; */
+}
+
+.header-text {
+  font-size: 2rem;
+  color: #02899C;
+  text-align: center;
+}
+
+.navbar-header {
+  text-align: center; 
+  /* width: 75%; */
+}
+
+.cover {
+  background-image: url("/img/colorfulBg.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center;  */
+}
+
+.logo {
+  font-size: 2rem;
+  color: #02899C;
+  text-align: center;
+}
+>>>>>>> origin/ashley
