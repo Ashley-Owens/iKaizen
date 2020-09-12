@@ -27,7 +27,7 @@ entriesRouter.get("/:id", loginRequired, async(req, res) => {
 
 entriesRouter.post("/", loginRequired, async(req, res) => {
     const {emotions, habitSelected, date} = req.body;
-    const newEntry;
+    let newEntry = {};
     if(req.body.date){
         if(validator.isDate(req.body.date)){
             date = req.body.date.toDate();

@@ -37,17 +37,19 @@ const checkEntryCount = async (increase) => {
   expect(entriesInDb).toHaveLength(initialLength + increase);
 };
 
-// describe("creating entries", () => {
-//   test("works when the user is logged in", async () => {
-//     const user = helper.user();
-//     const sessionId = await helper.login(api, user.username, user.password);
+describe("creating entries", () => {
+  test("works when the user is logged in", async () => {
+    const user = {
+      firstName: "first",
+      lastName: "last",
+      username: "myuser",
+      password: "mypassword",
+    };
 
-//     const entry = await createEntry(sessionId, 201);
-//   });
-// });
-
-describe("test", () => {
-  test("hmm", () => {
-    expect(true).toBe(true);
+    const newUser = await usersHelper.createUser(api, user, 201);
+    const sessionId = await usersHelper.login(api, user.username, user.password);
+    console.log(sessionId)
+    const entry = await createEntry(sessionId, 201);
+    console.log(entry)
   });
 });
