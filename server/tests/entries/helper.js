@@ -42,8 +42,9 @@ const deleteAll = async () => {
 };
 
 const entriesInDb = async () => {
-  const entries = await Entry.find({});
-  return entries.map((entry) => entry.toJSON());
+  return await Entry.find({});
+  // const entries = await Entry.find({});
+  // return entries.map((entry) => entry.toJSON());
 };
 
 const getEntry = async (api, sessionId, entryId, statusCode) => {
@@ -78,9 +79,11 @@ const getEntriesByUser = async (api, sessionId, query, statusCode) => {
     request.query(params);
   }
 
-  request.expect(statusCode);
+  // request.expect(statusCode);
 
-  return (await request).body;
+  const response = (await request).body;
+  // console.log(response);
+  return response;
 };
 
 module.exports = {

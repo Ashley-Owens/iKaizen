@@ -127,19 +127,6 @@ const checkSession = async (api, sessionId) => {
   return authenticated;
 };
 
-// const getUserBlogs = async (api, statusCode, sessionId) => {
-//   const request = api.get("/api/users/my/blogs");
-
-//   if (sessionId) {
-//     request.set("Cookie", `connect.sid=${sessionId}`);
-//   }
-
-//   const response = await request.expect(statusCode);
-//   const blogs = response.body;
-
-//   return blogs;
-// };
-
 module.exports = {
   insertInitialUsers,
   user,
@@ -152,7 +139,6 @@ module.exports = {
   login,
   logout,
   checkSession,
-  //   getUserBlogs,
   nonExistentId,
   createUser,
   editUser,
