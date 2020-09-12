@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavItem, Nav, Container} from 'react-bootstrap';
-import "./Footer.css";
+
 
 function Footer () {
     return(
@@ -25,7 +25,7 @@ function Footer () {
                 © iKaizen 2020
                 </div>
             </Container>
-            </footer>
+        </footer>
     )
 }
 

@@ -1,19 +1,41 @@
-.App-body {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .container {
-  /* For a standard set height use px, responsive height use vh = viewport height */
-  background-color: #282c34;
+  /* For a responsive height use vh = viewport height */
+  /* background-color: #282c34; */
+  background-image: url(./img/colorfulBg.jpg);
   height: 70vh; 
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+.cover {
+  width: 30rem;
+}  
+
+#content {
+  padding-top: 70vh;
+  min-height: "calc(100vh - 92px)";
+}
+
+footer {
+  text-align: center;
+  border-radius: 0 !important;
+  border-bottom: 0;
+  margin: 20px 0 0;
+}
+
+.copyright {
+    padding-top: @padding-small-horizontal / 2;
+    padding-bottom: @padding-small-horizontal;
+}
+
+.modal-backdrop {
+  background-color: black;
+}
+
+.my-modal .modal-content {
+  background-color: #343a40;
+  color: #ffffff;
+  /* color: #17a2b8; */
+}
+

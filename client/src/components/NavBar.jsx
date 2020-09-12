@@ -1,11 +1,8 @@
 import React from 'react';
 import {Navbar, Nav, Form, Button} from 'react-bootstrap';
-import MyModal from './MyModal';
-import './NavBar.css';
 
 
 function NavBar() {
-    const [modalShow, setModalShow] = React.useState(false);
 
     return (
         
@@ -13,13 +10,20 @@ function NavBar() {
             <Nav className="mr-auto">
             <Nav.Link href="./">Home</Nav.Link>
             <Nav.Link href="./About">About</Nav.Link>
-            <Nav.Link href="./MyModal" onClick={() => setModalShow(true)}>Log In</Nav.Link>
-            <MyModal show={modalShow} onHide={() => setModalShow(false)}/>
+            <Nav.Link href="./Dashboard">Dashboard</Nav.Link>
+
+            {/* Trying to right align this item */}
+            <div className="justify-content-end">
+                <Nav.Link href="./LogIn">Log In</Nav.Link>
+            </div>
+            
             {/* <Navbar.Brand href="#home">iKaizen</Navbar.Brand> */}
             </Nav>
             <Form inline>
-            <Form.Control type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-info">Search</Button>
+            <Form className="mr-sm-2"/>
+            <Nav.Link href="./SignUp">
+                <Button variant="outline-info">Sign Up</Button>
+            </Nav.Link>
             </Form>
         </Navbar>
     )

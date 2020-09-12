@@ -1,23 +1,10 @@
 import React from 'react';
-import {Modal, Button, Form, Col} from 'react-bootstrap'
+import {Button, Form, Col} from 'react-bootstrap'
 
 
-function MyModal(props) {
+function SignUp () {
     return (
-      <Modal
-        {...props}
-        className="my-modal"
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Account Sign Up
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
+        <Form>
           <Form.Group controlId="formGroupName">
             <Form.Label>Name</Form.Label>
             <Form.Row>
@@ -43,16 +30,11 @@ function MyModal(props) {
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
           </Form.Row>
+          <Button variant="info" type="submit">
+                Submit
+            </Button>
         </Form>  
-          <p>
-            If you already have an account, please log in <a href="#login modal">here</a>.
-          </p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="info" onClick={props.onHide}>Submit</Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  }
-  
-export default MyModal;
+    )
+}
+
+export default SignUp;

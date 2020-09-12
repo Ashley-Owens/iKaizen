@@ -8,12 +8,13 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Modal, Button} from 'react-bootstrap';
 import NavBar from './components/NavBar';
+import SignUp from './components/SignUp';
 import Greeter from './components/Greeter';
 import './App.css';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import About from './components/About';
-import MyModal from './components/MyModal';
+import LogIn from './components/LogIn';
 
 
 export default function App() {
@@ -21,38 +22,39 @@ export default function App() {
   
   return (
     <Router>
-    <div className="App">
-      <div id="content">
-        <NavBar/>
-        <Switch>
-          <Route path="/MyModal">
-            <MyModal />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-          {/* Dashboard needs to be Protected
-          <Route path="/Dashboard">
-            <Dashboard />  */}
-        </Switch>
+    <div className="Container">
+      <NavBar/>
+      <Switch>
+        <Route path="/SignUp">
+          <SignUp />
+        </Route>
+        <Route path="/LogIn">
+          <LogIn />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        {/* Dashboard needs to be Protected */}
+        <Route path="/Dashboard">
+          <Dashboard /> 
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
       </div>
-      <body>
-        <div class="container zone"><img class="cover" src="./img/undraw.png"></img>
-        </div>
-          <Button variant="info" to="./MyModal" onClick={() => setModalShow(true)}>Sign Up</Button>
-          <MyModal show={modalShow} onHide={() => setModalShow(false)}/>
-        {/* </div> */}
-      </body>
-      <Footer />
-    </div>
   </Router>
   );
 }
 
 
 function Home() {
-  return <h3>I'm the Home page</h3>;
+  return (
+    <div>
+      <h4>I'm the Home Page</h4>
+      <footer id="content">
+          <Footer />
+        </footer>
+    </div>
+  )
 }
