@@ -4,7 +4,7 @@ const usersHelper = require("../users/helper");
 
 const initialEntries = () => {
   return fakeEntries.map((entry) => {
-    return { ...entry, date: new Date(blog.date.getTime()) };
+    return { ...entry, date: new Date(entry.date.getTime()) };
   });
 };
 
@@ -32,6 +32,10 @@ const nonExistentId = async () => {
   return id;
 };
 
+const entryInDb = async () => {
+  return await Entry.findOne({ emotions: ["happy", "sad", "glad"] });
+};
+
 const deleteAll = async () => {
   await Entry.deleteMany({});
   await usersHelper.deleteAll();
@@ -48,4 +52,5 @@ module.exports = {
   deleteAll,
   entriesInDb,
   nonExistentId,
+  entryInDb,
 };

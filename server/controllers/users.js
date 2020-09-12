@@ -145,12 +145,13 @@ usersRouter.get("/my/entries", loginRequired, async (req, res) => {
 });
 
 usersRouter.post("/my/habits", loginRequired, async (req, res) => {
-  var isRecurring = true;
-  if (req.query.isLongTerm != "true" && req.query.isLongTerm != "false") {
+  let isReoccurring = true;
+
+  if (req.query.isLongTerm !== "true" && req.query.isLongTerm !== "false") {
     //testing if they pass isLongTerm and it is valid
     return res.status(400).json({ error: "Invalid query string" });
   } else {
-    isRecurring = Boolean(req.query.isLongTerm);
+    isReoccurring = req.query.isLongTerm === "false";
   }
 
   const { name, isBinary } = req.body;
@@ -160,25 +161,16 @@ usersRouter.post("/my/habits", loginRequired, async (req, res) => {
       .status(400)
       .json({ error: "Name or isBinary not given in request" });
   }
-  const habit = {};
-  const fields = ["name", "isBinary"];
-  for (let field of fields) {
-    if (req.body[field]) {
-      if (field === "isBinary") {
-        habit[field] = Boolean(req.body[field]);
-      } else {
-        habit[field] = req.body[field];
-      }
-    }
-  }
 
-  console.log(habit);
+  const habit = { user: req.user._id };
+
+  if (name) habit.name = name;
+  if (typeof isBinary === "boolean") habit.isBinary = isBinary;
 
   try {
-    if (!isRecurring) {
+    if (!isReoccurring) {
       var newHabit = await Habit.create(habit);
-      const habitID = newHabit._id;
-      req.user.longTermHabits.push(habitID);
+      req.user.longTermHabits.push(newHabit._id);
 
       await req.user.save();
 
@@ -190,8 +182,9 @@ usersRouter.post("/my/habits", loginRequired, async (req, res) => {
       await req.user.save();
     }
   } catch (error) {
-    return res.status(400).json({ error: "Malformed request" });
+    return res.status(400).json({ error: error.message });
   }
+
   res.status(201).end();
 });
 

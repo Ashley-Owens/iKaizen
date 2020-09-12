@@ -29,7 +29,10 @@ const insertInitialHabits = async () => {
 
     newHabit.user = user._id;
     user.longTermHabits.push(newHabit._id);
+    await newHabit.save();
   }
+
+  await user.save();
 };
 
 const nonExistentId = async () => {
@@ -55,10 +58,42 @@ const habitsInDb = async () => {
   return habits.map((habit) => habit.toJSON());
 };
 
+const habitInDb = async () => {
+  const user = await usersHelper.userInDb();
+  return await Habit.findOne({ user: user._id });
+};
+
+const editHabit = async (api, sessionId, habitId, habitEdit, statusCode) => {
+  const request = api.put(`/api/habits/${habitId}`);
+
+  if (sessionId) {
+    request.set("Cookie", `connect.sid=${sessionId}`);
+  }
+
+  request.send(habitEdit).expect(statusCode);
+
+  return (await request).body;
+};
+
+const deleteHabit = async (api, sessionId, habitId, statusCode) => {
+  const request = api.delete(`/api/habits/${habitId}`);
+
+  if (sessionId) {
+    request.set("Cookie", `connect.sid=${sessionId}`);
+  }
+
+  request.expect(statusCode);
+
+  return (await request).body;
+};
+
 module.exports = {
   insertInitialHabits,
   initialHabits,
   deleteAll,
   habitsInDb,
   nonExistentId,
+  habitInDb,
+  editHabit,
+  deleteHabit,
 };
