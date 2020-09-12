@@ -79,7 +79,7 @@ habitsRouter.delete("/:id", loginRequired, async (req, res) => {
     const userID = habit.user;
     const entryIDs = habit.entries;
 
-    await User.update(
+    await User.updateOne(
       { _id: userID },
       { $pull: { longTermHabits: habit._id } }
     );

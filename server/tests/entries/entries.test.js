@@ -37,19 +37,205 @@ const checkEntryCount = async (increase) => {
   expect(entriesInDb).toHaveLength(initialLength + increase);
 };
 
-describe("creating entries", () => {
-  test("works when the user is logged in", async () => {
-    const user = {
-      firstName: "first",
-      lastName: "last",
-      username: "myuser",
-      password: "mypassword",
-    };
+/* describe("retrieving entries by id", () => {
+  test("works when the request is valid and the user is logged in", async () => {
+    const user = usersHelper.user();
+    const entryInDb = await helper.entryInDb();
+    const sessionId = await usersHelper.login(
+      api,
+      user.username,
+      user.password
+    );
 
-    const newUser = await usersHelper.createUser(api, user, 201);
-    const sessionId = await usersHelper.login(api, user.username, user.password);
-    console.log(sessionId)
-    const entry = await createEntry(sessionId, 201);
-    console.log(entry)
+    const retrievedEntry = await helper.getEntry(
+      api,
+      sessionId,
+      entryInDb._id,
+      200
+    );
+
+    expect(JSON.stringify(entryInDb)).toEqual(JSON.stringify(retrievedEntry));
+  });
+
+  test("fails with a 401 status code when the user is not logged in", async () => {
+    const entryInDb = await helper.entryInDb();
+
+    const responseBody = await helper.getEntry(api, null, entryInDb._id, 401);
+    expect(responseBody.error).toBeDefined();
+  });
+
+  test("fails with a 400 status code when the entry id is invalid", async () => {
+    const invalidId = "abcde";
+    const user = usersHelper.user();
+    const sessionId = await usersHelper.login(
+      api,
+      user.username,
+      user.password
+    );
+
+    const responseBody = await helper.getEntry(api, sessionId, invalidId, 400);
+    expect(responseBody.error).toBeDefined();
+  });
+
+  test("fails with a 404 status code when the specified entry is not found", async () => {
+    const nonExistentId = await helper.nonExistentId();
+    const user = usersHelper.user();
+    const sessionId = await usersHelper.login(
+      api,
+      user.username,
+      user.password
+    );
+
+    const responseBody = await helper.getEntry(
+      api,
+      sessionId,
+      nonExistentId,
+      404
+    );
+    expect(responseBody.error).toBeDefined();
+  });
+
+  test("fails with a 401 status code when the user making the request does not own the entry", async () => {
+    const unauthorizedUser = { username: "testuser", password: "testpassword" };
+    const sessionId = await usersHelper.login(
+      api,
+      unauthorizedUser.username,
+      unauthorizedUser.password
+    );
+
+    const entryInDb = await helper.entryInDb();
+
+    const responseBody = await helper.getEntry(
+      api,
+      sessionId,
+      entryInDb._id,
+      401
+    );
+    expect(responseBody.error).toBeDefined();
   });
 });
+
+describe("retrieving entries for a logged in user", () => {
+    test("fails with a 401 status code when the user is not logged in", async () => {
+      const responseBody = await helper.getEntriesByUser(api, null, {}, 401);
+      expect(responseBody.error).toBeDefined();
+    });
+
+    test("fails with a 400 status code when no query string is provided", async () => {
+      const user = usersHelper.user();
+      const sessionId = await usersHelper.login(
+        api,
+        user.username,
+        user.password
+      );
+
+      const responseBody = await helper.getEntriesByUser(api, sessionId, {}, 400);
+      expect(responseBody.error).toBeDefined();
+    });
+
+  test("fails with a 400 status code when no query string is provided", async () => {
+      const user = usersHelper.user();
+      const sessionId = await usersHelper.login(
+        api,
+        user.username,
+        user.password
+      );
+
+      const responseBody = await helper.getEntriesByUser(api, sessionId, {}, 400);
+      expect(responseBody.error).toBeDefined();
+    });
+
+  test("fails with a 400 status code when an invalid query string is provided", async () => {
+    const user = usersHelper.user();
+    const sessionId = await usersHelper.login(
+      api,
+      user.username,
+      user.password
+    );
+
+    // send an empty query string
+    let responseBody = await helper.getEntriesByUser(api, sessionId, {}, 400);
+    expect(responseBody.error).toBeDefined();
+
+    // query by year without a month
+    responseBody = await helper.getEntriesByUser(
+      api,
+      sessionId,
+      { year: "2020" },
+      400
+    );
+    expect(responseBody.error).toBeDefined();
+    responseBody = await helper.getEntriesByUser(
+      api,
+      sessionId,
+      { year: "2020", day: "10" },
+      400
+    );
+    expect(responseBody.error).toBeDefined();
+
+    // query by month without a year
+    responseBody = await helper.getEntriesByUser(
+      api,
+      sessionId,
+      { month: "08" },
+      400
+    );
+    expect(responseBody.error).toBeDefined();
+    responseBody = await helper.getEntriesByUser(
+      api,
+      sessionId,
+      { month: "08", day: "10" },
+      400
+    );
+    expect(responseBody.error).toBeDefined();
+
+    // query by just a day
+    responseBody = await helper.getEntriesByUser(
+      api,
+      sessionId,
+      { day: "10" },
+      400
+    );
+    expect(responseBody.error).toBeDefined();
+  });
+});
+ */
+//POST testing
+describe("posting entries", () => {
+  test("works when the post is valid and the user is logged in", async () => {
+    const user = usersHelper.user();
+    const entryInDb = await helper.entryInDb();
+    const sessionId = await usersHelper.login(
+      api,
+      user.username,
+      user.password
+    );
+    console.log(sessionId);
+    const retrievedEntry = await helper.getEntry(
+      api,
+      sessionId,
+      entryInDb._id,
+      200
+    );
+
+    expect(JSON.stringify(entryInDb)).toEqual(JSON.stringify(retrievedEntry));
+  })});
+
+ /*  const user = usersHelper.user();
+  const habit = { name: "my new habit", isBinary: false };
+  const sessionId = await usersHelper.login(
+    api,
+    user.username,
+    user.password
+  );
+
+  const newHabit = await createUserHabit(sessionId, habit, "true", 201);
+  const userInDb = await usersHelper.userInDb();
+
+  const userLongTermHabits = userInDb.longTermHabits.map((id) =>
+    id.toString()
+  );
+
+  expect(userLongTermHabits).toContain(newHabit.id);
+  expect(newHabit.user).toBe(userInDb._id.toString());
+  expect(userInDb.get(habit.name)).not.toBeDefined(); */

@@ -46,6 +46,43 @@ const entriesInDb = async () => {
   return entries.map((entry) => entry.toJSON());
 };
 
+const getEntry = async (api, sessionId, entryId, statusCode) => {
+  const request = api.get(`/api/entries/${entryId}`);
+
+  if (sessionId) {
+    request.set("Cookie", `connect.sid=${sessionId}`);
+  }
+
+  request.expect(statusCode);
+
+  return (await request).body;
+};
+
+const getEntriesByUser = async (api, sessionId, query, statusCode) => {
+  const params = {};
+
+  const paramList = ["year", "month", "day"];
+  for (let param of paramList) {
+    if (query[param]) {
+      params[param] = query[param];
+    }
+  }
+
+  const request = api.get("/api/users/my/entries");
+
+  if (sessionId) {
+    request.set("Cookie", `connect.sid=${sessionId}`);
+  }
+
+  if (Object.keys(params).length > 0) {
+    request.query(params);
+  }
+
+  request.expect(statusCode);
+
+  return (await request).body;
+};
+
 module.exports = {
   insertInitialEntries,
   initialEntries,
@@ -53,4 +90,6 @@ module.exports = {
   entriesInDb,
   nonExistentId,
   entryInDb,
+  getEntry,
+  getEntriesByUser,
 };

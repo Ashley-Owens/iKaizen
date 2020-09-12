@@ -74,18 +74,25 @@ usersRouter.put("/myself", loginRequired, async (req, res) => {
 });
 
 usersRouter.get("/my/entries", loginRequired, async (req, res) => {
-  const { year, month, day, view = "weekly" } = req.query;
-  const userID = req.user._id;
-  const date = new Date();
-  const currentDay = date.getDay(); //day of the week
-  const currentDate = date.getDate(); //current day of the date
-  const currentMonth = date.getMonth();
-  const currentYear = date.getFullYear();
+  console.log(req.query);
 
-  //When they don't enter a query:
   if (Object.keys(req.query).length === 0) {
     return res.status(400).json({ error: "No date query entered" });
   }
+
+  const { year, month, day, view = "weekly" } = req.query;
+
+  if (!year && !month) {
+    return res.status(400).json({ error: "Invalid date query" });
+  }
+
+  // editing in progress
+
+  const userID = req.user._id;
+  const date = new Date();
+  const currentMonth = date.getMonth();
+  const currentYear = date.getFullYear();
+
   try {
     if (view === "weekly") {
       const firstDayofWeek = new Date();
