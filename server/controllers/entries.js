@@ -6,10 +6,26 @@ const Habit = require("../models/habit");
 const Entry = require("../models/entry");
 const idCheck = require("../middleware/idCheck");
 
-entriesRouter.get("/:id", loginRequired, async (req, res) => {
-    idCheck(req, res, next, "entry");
-}, async (req, res) => {
-    res.status(200).json(entry);
+entriesRouter.get("/:id", loginRequired, async (req, res, next) => {
+    const id = req.params.id;
+
+  //Case 1
+  try {
+    var entry = await Entry.findById(id);
+  } catch (error) {
+    return res.status(400).json({ error: "Invalid ID" });
+  }
+
+  //Case 2
+  if (!entry) {
+    return res.status(404).json({ error: "No such habit exists" });
+  }
+
+  //Case 3
+  if (req.user._id.toString() !== habit.user.toString()) {
+    return res.status(401).json({ error: "ID not found" });
+  }
+  res.status(204).end();
 });
 
 /*
