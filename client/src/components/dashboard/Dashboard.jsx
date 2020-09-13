@@ -8,7 +8,8 @@ import HabitList from "./HabitList";
 
 import EntryList from "./EntryList";
 
-import Footer from "../Footer";
+import Footer from '../Footer';
+import withRouteProtection from '../auth/withRouteProtection';
 
 class Dashboard extends Component {
   state = {
