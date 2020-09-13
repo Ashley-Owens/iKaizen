@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container} from 'react-bootstrap';
+import {Image} from 'react-bootstrap';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import Footer from './components/Footer';
@@ -47,14 +47,10 @@ export default function App() {
 
 function Home() {
   return (
-   
+  
     <div className="cover">
-        <p className="logo">iKaizen</p>
-        <p className="text">iKaizen</p>
-    </div>
-      
-
-
-    
+      <img className="logo" src={process.env.PUBLIC_URL + '/img/logo.png'} alt="logo" />
+      <p className="text">iKaizen is a web application that aims to help its users implement the kaizen philosophy. Kaizen teaches that small and steady changes over time yield remarkable results. Are you ready to take the first step? </p>
+  </div> 
   )
 }

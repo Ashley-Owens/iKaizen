@@ -6,9 +6,9 @@ function Footer () {
     return(
        
         <Navbar>
-            <nav class="navbar fixed-bottom navbar-light bg-light">
+            <nav className="navbar fixed-bottom navbar-light bg-light">
             <Nav className="mr-auto">
-                {/*   */}
+                {/*  TODO: add contact form */}
                 <Nav.Link href="#">Contact Us</Nav.Link>
             </Nav>
                 <nav className="text-center small copyright">
