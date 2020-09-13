@@ -33,23 +33,13 @@ class CreateHabit extends Component {
                 <Form.Group controlId="habitName">
                     <Form.Control
                     name="habitName"
-                    placeholder="Create Habit"
-                    value={this.state.title}
-                    onChange={(event, newValue) => this.setState({name: newValue})}
-                    />
-                </Form.Group>
-                <Form.Group controlId="habitName">
-                    <DropdownButton id="dropdown-basic-button" title="Select Habit" onSelect={(e, newValue) => this.setState({name: newValue})}>
+                    placeholder="Select Habit"
+                    as="select"
+                    onSelect={(event, newValue) => this.setState({name: newValue})}>
                         {habits.map(habit => {
-                            return <Dropdown.Item key={habit}>{habit.name}</Dropdown.Item>
+                            return <option key={habit}>{habit.name}</option>
                         })}
-                    </DropdownButton>
-                    <Form.Control
-                    name="habitName"
-                    placeholder="Create Habit"
-                    value={this.state.title}
-                    onChange={(event, newValue) => this.setState({name: newValue})}
-                    />
+                    </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="habitType">
                     <Form.Label>How would you like to track your habit?</Form.Label>
@@ -89,6 +79,13 @@ class CreateHabit extends Component {
                 
             // </form>
            
+            /*
+                    <DropdownButton id="dropdown-basic-button" title="Select Habit" onSelect={(e, newValue) => this.setState({name: newValue})}>
+                        {habits.map(habit => {
+                            return <Dropdown.Item key={habit}>{habit.name}</Dropdown.Item>
+                        })}
+                    </DropdownButton>
+            */
         );
     }
 }

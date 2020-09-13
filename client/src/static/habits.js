@@ -1,6 +1,7 @@
 // A list containing the habits to be tracked along with some helpful descriptions for the user.
 
 const habits = [
+    {name: "Select Habit", category: "None"},
     {name: "Slept at least 7 hours last night", category: "Health"},
     {name: "Brush and floss teeth twice today", category: "Health"},
     {name: "Take daily medicine/vitamins", category: "Health"},
