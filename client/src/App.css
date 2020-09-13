@@ -54,11 +54,12 @@
 }
 
 .text-header {
-  color: black;
+  color: #343a40;
+  font-variant: small-caps;
   text-align: center;
   text-justify: auto;
   font-size: 1.8em;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .about-text {
@@ -66,7 +67,7 @@
   text-align: center;
   text-justify: auto;
   font-size: 1.2em;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 /* .home-content-container {

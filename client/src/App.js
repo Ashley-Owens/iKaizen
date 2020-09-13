@@ -56,6 +56,7 @@ function Home() {
           </div>
           
           <p className="home-text px-5">iKaizen is a web application that helps its users implement kaizen philosophy for personal growth and healthier lifestyles. Kaizen teaches that small and steady changes over time yield remarkable results. Are you ready to take your first step? </p>
+          
         </div>
       </div> 
       <Footer />
