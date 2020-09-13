@@ -7,6 +7,7 @@ import withRouteProtection from "../auth/withRouteProtection";
 import CreateHabit from './CreateHabit';
 import AddHabit from './AddHabit';
 import HabitList from './HabitList';
+import MakeEntry from './MakeEntry';
 
 import EntryList from "./EntryList";
 
@@ -150,6 +151,14 @@ class Dashboard extends Component {
                                 </Card.Body>
                             </Card>
                         </Col>
+                    </Row>
+                    <Row>
+                        <Card>
+                            <Card.Body>
+                                <Card.Title>Create Your Daily Entry</Card.Title>
+                                <MakeEntry />
+                            </Card.Body>
+                        </Card>
                     </Row>
                 </div>
  
