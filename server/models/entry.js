@@ -3,7 +3,7 @@ const uniqueValidator = require("mongoose-unique-validator");
 const formatDate = require("../utils/formatDate");
 
 const entrySchema = new mongoose.Schema({
-  emotions: [{ type: String, required: true }],
+  emotions: [{ type: String }],
   date: { type: Date, unique: true, required: true, default: Date.now },
   habitsSelected: [{ type: mongoose.Schema.Types.ObjectId, ref: "Habit" }],
   user: {
@@ -13,10 +13,10 @@ const entrySchema = new mongoose.Schema({
 });
 
 entrySchema.set("toJSON", {
-  transform: (document, returnedObect) => {
-    returnedObect.id = returnedObject._id.toString();
-    delete returnedObect._id;
-    delete returnedObect.__v;
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
 
     returnedObject.date = formatDate(returnedObject.date);
   },

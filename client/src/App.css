@@ -1,38 +1,70 @@
-.App {
+<<<<<<< HEAD
+.container {
+  /* background-color: #282c34; */
+  height: 70vh; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+=======
+>>>>>>> origin/ashley
+.modal-backdrop {
+  background-color: black;
+}
+
+.my-modal .modal-content {
+  background-color: #343a40; 
+  color: #ffffff;
+  /* color: #17a2b8; */
+}
+
+.header-text {
+  font-size: 2rem;
+  color: #02899C;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar-header {
+  text-align: center; 
+  /* width: 75%; */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.cover {
+  background-image: url("/img/colorfulBg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.logo {
+  Height: 300px;
+  Width: 300px;
+}
+
+.text {
+  color:#282c34;
+  text-align: center;
+  text-justify: auto;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+/* .home-content-container {
+  position: relative;
+}
+<<<<<<< HEAD
+=======
+
+.home-content {
+  position: absolute;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+} */
+>>>>>>> origin/ashley

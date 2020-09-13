@@ -1,20 +1,32 @@
 import React from 'react';
-import {Navbar, Nav, Form, Button} from 'react-bootstrap'
+import {Navbar, Nav, Button} from 'react-bootstrap';
+
 
 function NavBar() {
+
     return (
+        
         <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+            {/* Left aligned items */}
             <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Navbar.Brand href="./">iKaizen</Navbar.Brand>
+            <Nav.Link href="./About">About</Nav.Link>
+            <Nav.Link href="./Dashboard">Dashboard</Nav.Link>
             </Nav>
-            <Form inline>
-            <Form.Control type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-info">Search</Button>
-            </Form>
+            
+            <Nav>
+            {/* Right-aligned items */}
+                <Nav.Link href="./LogIn">
+                <Button variant="outline-info">Log In</Button></Nav.Link>
+                <Nav.Link href="./SignUp">
+                    <Button variant="info">Sign Up</Button>
+                </Nav.Link>
+            </Nav>
         </Navbar>
     )
 }
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/ashley
 export default NavBar;

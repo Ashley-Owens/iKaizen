@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   passwordHash: { type: String, required: true },
   email: { type: String },
   dateCreated: { type: Date, default: Date.now },
-  reoccurringHabits: [{ type: Map, of: Boolean }],
+  reoccurringHabits: { type: Map, of: Boolean, default: {} },
   longTermHabits: [
     {
       type: mongoose.Schema.Types.ObjectId,
