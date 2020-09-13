@@ -54,4 +54,9 @@ app.use("/api/users", usersRouter);
 app.use("/api/entries", entriesRouter);
 app.use("/api/habits", habitsRouter);
 
+// handle invalid routes
+app.use((req, res) => {
+  res.sendStatus(404);
+});
+
 module.exports = app;
