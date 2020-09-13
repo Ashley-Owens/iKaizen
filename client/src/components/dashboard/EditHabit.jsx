@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-class CreateHabit extends Component {
+class EditHabit extends Component {
 
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
             name: "",
@@ -11,17 +11,14 @@ class CreateHabit extends Component {
         };
     }
 
-    postHabit = () => {
+    editHabit = (id) => {
+        console.log(id);
         const payload={
             "name": this.state.name,
             "isBinary": this.state.isBinary
         }
-        /*axios.post('/api/users/my/habit', payload)
-        .then() */
-    }
-
-    buttonChange = (e) => {
-        this.setState({isBinary: e.target.value})
+        /*axios.post('/api/users/habit/' + id, payload)
+        .then()*/
     }
 
     render() {
@@ -43,9 +40,9 @@ class CreateHabit extends Component {
                     <label for="isNotBinary" style={{paddingLeft: "6px"}}>Percentage Complete</label>
                 </p>
                 
-                <button name="submitHabit" onClick={this.postHabit}>Submit</button>
+                <button name="submitHabit" onClick={this.editHabit.bind(this, this.props.id)}>Update</button>
             </form>
-        );
+        )
     }
 }
 
@@ -56,4 +53,4 @@ const formStyle = {
     width: "100%",
 }
 
-export default CreateHabit;
+export default EditHabit;
