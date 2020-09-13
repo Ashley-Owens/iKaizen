@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {Card, Button, Form, DropdownButton, Dropdown} from 'react-bootstrap';
+import {Card, Button, Form} from 'react-bootstrap';
 import axios from 'axios';
-import habits from '../../static/habits.js'
 
-class CreateHabit extends Component {
+class AddHabit extends Component {
 
     constructor() {
         super();
@@ -31,19 +30,6 @@ class CreateHabit extends Component {
 
             <Form>
                 <Form.Group controlId="habitName">
-                    <Form.Control
-                    name="habitName"
-                    placeholder="Create Habit"
-                    value={this.state.title}
-                    onChange={(event, newValue) => this.setState({name: newValue})}
-                    />
-                </Form.Group>
-                <Form.Group controlId="habitName">
-                    <DropdownButton id="dropdown-basic-button" title="Select Habit" onSelect={(e, newValue) => this.setState({name: newValue})}>
-                        {habits.map(habit => {
-                            return <Dropdown.Item key={habit}>{habit.name}</Dropdown.Item>
-                        })}
-                    </DropdownButton>
                     <Form.Control
                     name="habitName"
                     placeholder="Create Habit"
@@ -100,4 +86,4 @@ class CreateHabit extends Component {
 //     width: "100%",
 // }
 
-export default CreateHabit;
+export default AddHabit;

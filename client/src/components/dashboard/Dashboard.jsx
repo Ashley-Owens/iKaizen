@@ -5,6 +5,7 @@ import withRouteProtection from "../auth/withRouteProtection";
 
 
 import CreateHabit from './CreateHabit';
+import AddHabit from './AddHabit';
 import HabitList from './HabitList';
 
 import EntryList from "./EntryList";
@@ -111,7 +112,7 @@ class Dashboard extends Component {
                             <Card.Text>
                             Add to your list of tracked habits by creating your own.
                             </Card.Text>
-                            <CreateHabit />
+                            <AddHabit />
                         </Card.Body>
                         </Card>
                         </Col>
