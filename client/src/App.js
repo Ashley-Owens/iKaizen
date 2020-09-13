@@ -10,7 +10,7 @@ import {Container, Image} from 'react-bootstrap';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import Footer from './components/Footer';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/dashboard/Dashboard';
 import About from './components/About';
 import LogIn from './components/LogIn';
 import './App.css';
