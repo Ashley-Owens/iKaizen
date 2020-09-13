@@ -14,7 +14,7 @@ function About () {
             </div>
 
         <Container>
-          <div className="flex-grow-1 home-content-container nav-padding">
+          <div className="flex-grow-1 nav-padding">
             <div className="home-content pt-1">
               
               <p className="about-text-header">What is kaizen?</p>
