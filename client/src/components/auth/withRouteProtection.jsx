@@ -18,7 +18,7 @@ export default function withRouteProtection(Component, componentProps) {
         }
 
         if (!authenticated || authError) {
-          history.replace("/login");
+          history.replace(redirectTo);
         }
       }
     }, [loading, authenticated, authError]);

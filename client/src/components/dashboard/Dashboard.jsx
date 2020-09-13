@@ -3,24 +3,22 @@ import axios from "axios";
 import NavBar from "../NavBar";
 import withRouteProtection from "../auth/withRouteProtection";
 
-
-import CreateHabit from './CreateHabit';
-import AddHabit from './AddHabit';
-import HabitList from './HabitList';
-import MakeEntry from './MakeEntry';
+import CreateHabit from "./CreateHabit";
+import AddHabit from "./AddHabit";
+import HabitList from "./HabitList";
 
 import EntryList from "./EntryList";
 
 import Footer from "../Footer";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, Button, Row, Col} from 'react-bootstrap';
-import '../../App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Card, Button, Row, Col } from "react-bootstrap";
+import "../../App.css";
 
 class Dashboard extends Component {
-    constructor() {
-        super();
-        /*
+  constructor() {
+    super();
+    /*
         axios.get('/api/users/my/habits')
         .then(res => this.setState({habits: res.data}));
 
@@ -98,84 +96,78 @@ class Dashboard extends Component {
     });
   };
 
-    render() {
-        return(
-            <div className="pt-5 nav-padding">
-                <NavBar />
-                <div>
+  render() {
+    return (
+      <div className="pt-5 nav-padding">
+        <NavBar />
+        <div>
+          <div className="bg-light card-header">Enter A New Habit</div>
+          <Row>
+            <Col>
+              <Card>
+                <Card.Body>
+                  <Card.Title>Create your own</Card.Title>
+                  <Card.Text>
+                    Add to your list of tracked habits by creating your own.
+                  </Card.Text>
+                  <AddHabit />
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card>
+                <Card.Body>
+                  <Card.Title>Choose A Habit</Card.Title>
+                  <Card.Text>
+                    Add to your list of tracked habits by choosing from a list.
+                  </Card.Text>
+                  <CreateHabit />
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+          <Row style={{ margin: "10px" }}>
+            <Col>
+              <Card>
+                <Card.Body>
+                  <Card.Title>Current User Habits</Card.Title>
+                  <Card.Text></Card.Text>
+                  <HabitList
+                    habits={this.state.habits}
+                    delHabit={this.delHabit}
+                  />
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card>
+                <Card.Body>
+                  <Card.Text>
+                    <Card.Title>Current User Entries</Card.Title>
+                    <Card.Text> </Card.Text>
+                    <EntryList
+                      entries={this.state.entries}
+                      delEntry={this.delEntry}
+                    />
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        </div>
 
-                <div className="bg-light card-header">Enter A New Habit</div>
-                    <Row>
-                        <Col>
-                        <Card>
-                        <Card.Body>
-                            <Card.Title>Create your own</Card.Title>
-                            <Card.Text>
-                            Add to your list of tracked habits by creating your own.
-                            </Card.Text>
-                            <AddHabit />
-                        </Card.Body>
-                        </Card>
-                        </Col>
-                        <Col>
-                        <Card>
-                        <Card.Body>
-                            <Card.Title>Choose A Habit</Card.Title>
-                            <Card.Text>
-                            Add to your list of tracked habits by choosing from a list.
-                            </Card.Text>
-                            <CreateHabit />
-                        </Card.Body>
-                    </Card>
-                        </Col>
-                    </Row>
-                    <Row style={{margin: "10px"}}>
-                        <Col>
-                            <Card>
-                            <Card.Body>
-                                <Card.Title>Current User Habits</Card.Title>
-                                <Card.Text>
-                                </Card.Text>
-                                <HabitList habits={this.state.habits} delHabit={this.delHabit}/>
-                            </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col>
-                            <Card>
-                                <Card.Body>
-                                <Card.Text>
-                                    <Card.Title>Current User Entries</Card.Title>
-                                    <Card.Text> </Card.Text>
-                                    <EntryList entries={this.state.entries} delEntry={this.delEntry} />
-                                </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>Create Your Daily Entry</Card.Title>
-                                <MakeEntry />
-                            </Card.Body>
-                        </Card>
-                    </Row>
-                </div>
- 
-
-
-                        {/* <button onClick={this._displayHabitForm}>Add a New Habit</button>
+        {/* <button onClick={this._displayHabitForm}>Add a New Habit</button>
                         { this.state.displayFormHabit && <CreateHabit />}
                         <HabitList habits={this.state.habits} delHabit={this.delHabit}/>
                         <hr></hr>
 
                         <EntryList entries={this.state.entries} delEntry={this.delEntry}/>
                     </div> */}
-                    
-                <Footer />
-            </div>
-        );
-    }
+
+        <Footer />
+      </div>
+    );
+  }
 }
 
-export default /*withRouteProtection(*/Dashboard/*, { redirectTo: "/about" });*/
+export default withRouteProtection(Dashboard, { redirectTo: "/login" });
