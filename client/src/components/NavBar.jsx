@@ -6,7 +6,7 @@ function NavBar() {
 
     return (
         
-        <Navbar bg="dark" variant="dark">
+        <Navbar fixed="top" bg="dark" variant="dark">
             {/* Left aligned items */}
             <Nav className="mr-auto">
             <Navbar.Brand href="./">iKaizen</Navbar.Brand>
@@ -25,8 +25,4 @@ function NavBar() {
         </Navbar>
     )
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/ashley
 export default NavBar;

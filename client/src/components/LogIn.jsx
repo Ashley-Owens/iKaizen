@@ -8,8 +8,9 @@ function LogIn () {
     return (
         <>
         <NavBar/>
-        <Container className="pt-5">
+        <Container className="pt-5 px-5">
             <Form>
+            <div className="nav-padding">
                 <p className="header-text">Please sign in to your account</p>
                 <Form.Group controlId="formGroupUsername">
                     <Form.Label>Username</Form.Label>
@@ -26,6 +27,7 @@ function LogIn () {
                 <Button variant="info" type="submit">
                     Submit
                 </Button>
+                </div>
             </Form>
             <Footer />
         </Container>

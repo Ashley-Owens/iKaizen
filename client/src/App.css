@@ -1,15 +1,14 @@
-<<<<<<< HEAD
-.container {
-  /* background-color: #282c34; */
-  height: 70vh; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+
+@media (max-width: 980px) {
+  body {
+    padding-top: 0;
+  }
 }
 
-=======
->>>>>>> origin/ashley
+.nav-padding {
+  margin-top: 60px;
+}
+
 .modal-backdrop {
   background-color: black;
 }
@@ -54,8 +53,6 @@
 /* .home-content-container {
   position: relative;
 }
-<<<<<<< HEAD
-=======
 
 .home-content {
   position: absolute;
@@ -67,4 +64,3 @@
   height: 100%;
   width: 100%;
 } */
->>>>>>> origin/ashley
