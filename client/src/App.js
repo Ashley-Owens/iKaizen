@@ -55,7 +55,7 @@ function Home() {
           <img className="logo" src={process.env.PUBLIC_URL + '/img/logo.png'} alt="logo" />
           </div>
           
-          <p className="text px-5">iKaizen is a web application that helps its users implement kaizen philosophy for healthier lifestyles and personal growth. Kaizen teaches that small and steady changes over time yield remarkable results. Are you ready to take the first step? </p>
+          <p className="home-text px-5">iKaizen is a web application that helps its users implement kaizen philosophy for personal growth and healthier lifestyles. Kaizen teaches that small and steady changes over time yield remarkable results. Are you ready to take your first step? </p>
         </div>
       </div> 
       <Footer />

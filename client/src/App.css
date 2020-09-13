@@ -1,4 +1,3 @@
-
 @media (max-width: 980px) {
   body {
     padding-top: 0;
@@ -25,13 +24,16 @@
   text-align: center;
 }
 
-.navbar-header {
-  text-align: center; 
-  /* width: 75%; */
-}
-
 .cover {
   background-image: url("/img/colorfulBg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.cover2 {
+  background-image: url("/img/changing_leaves.jpg");
+  height: 300px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -42,9 +44,25 @@
   Width: 300px;
 }
 
-.text {
+.home-text {
   /* color:#282c34; */
   color:#485456;
+  text-align: center;
+  text-justify: auto;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.text-header {
+  color: black;
+  text-align: center;
+  text-justify: auto;
+  font-size: 1.8em;
+  font-weight: 500;
+}
+
+.about-text {
+  color: #02899C;
   text-align: center;
   text-justify: auto;
   font-size: 1.2em;
@@ -65,3 +83,14 @@
   height: 100%;
   width: 100%;
 } */
+
+.changing-leaves-cover {
+  position: relative;
+}
+
+.logo-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
