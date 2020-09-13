@@ -1,64 +1,16 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Formik } from "formik";
-import * as yup from "yup";
-import { Button, Form, Container } from "react-bootstrap";
-import { mutate } from "swr";
-import { login } from "../api/users";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
-import Spinner from "./auth/Spinner";
+import React from 'react';
+import {Button, Form, Container} from 'react-bootstrap'
+import NavBar from './NavBar';
+import Footer from './Footer';
 
-function LogIn() {
-  const [authenticating, setAuthenticating] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const history = useHistory();
 
-  const schema = yup.object({
-    username: yup.string().required("required"),
-    password: yup.string().required("required"),
-  });
-
-  const handleSubmit = async (values, { setSubmitting }) => {
-    setSubmitting(false);
-    setErrorMessage("");
-    setAuthenticating(true);
-
-    const { authenticated, error } = await login(
-      values.username,
-      values.password
-    );
-
-    const url = "http://localhost:3001/users/my/session";
-    mutate(url);
-
-    if (authenticated) {
-      history.push("/dashboard");
-    } else {
-      setErrorMessage(error);
-      setAuthenticating(false);
-    }
-  };
-
-  if (authenticating) {
-    return <Spinner />;
-  }
-
-  return (
-    <>
-      <NavBar />
-      <Container className="pt-5">
-        <Formik
-          validationSchema={schema}
-          onSubmit={handleSubmit}
-          initialValues={{
-            username: "",
-            password: "",
-          }}
-        >
-          {({ handleChange, handleSubmit, touched, errors }) => {
-            return (
-              <Form noValidate onSubmit={handleSubmit}>
+function LogIn () {
+    return (
+        <>
+        <NavBar/>
+        <Container className="pt-5 px-5">
+            <Form>
+            <div className="nav-padding">
                 <p className="header-text">Please sign in to your account</p>
                 {errorMessage ? (
                   <div className="small mb-3 text-danger">{errorMessage}</div>
@@ -97,12 +49,10 @@ function LogIn() {
                 <Button variant="info" type="submit">
                   Submit
                 </Button>
-              </Form>
-            );
-          }}
-        </Formik>
-        <Footer />
-      </Container>
+                </div>
+            </Form>
+            <Footer />
+        </Container>
     </>
   );
 }

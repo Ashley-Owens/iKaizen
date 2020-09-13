@@ -9,11 +9,11 @@ function SignUp () {
         
         <div className="d-flex flex-column">
             <NavBar/>
-
             <Container> 
+                <div className="nav-padding">
                 <div className="flex-grow-1 home-content-container pt-5">
-                    <div className="home-content pt-5">
-                <Form>
+                    <div className="home-content pt-1">
+                <Form className="px-5">
                     <p className="header-text">Let's Get Started!</p>
                     <Form.Group controlId="formGroupName">
                         <Form.Label>Name</Form.Label>
@@ -55,6 +55,7 @@ function SignUp () {
                 </div>
             </div>
             <Footer />
+            </div>
         </Container>
     </div>
   );

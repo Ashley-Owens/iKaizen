@@ -10,17 +10,15 @@ function NavBar() {
         <Nav.Link href="./About">About</Nav.Link>
         <Nav.Link href="./Dashboard">Dashboard</Nav.Link>
       </Nav>
-
       <Nav>
         {/* Right-aligned items */}
-        <Nav.Link href="./LogIn">
-          <Button variant="outline-info">Log In</Button>
-        </Nav.Link>
-        <Nav.Link href="./SignUp">
-          <Button variant="info">Sign Up</Button>
-        </Nav.Link>
-      </Nav>
+            <Nav.Link href="./LogIn">
+            <Button variant="outline-info">Log In</Button></Nav.Link>
+            <Nav.Link href="./SignUp">
+                <Button variant="info">Sign Up</Button>
+            </Nav.Link>
+        </Nav>
     </Navbar>
-  );
+    )
 }
 export default NavBar;
