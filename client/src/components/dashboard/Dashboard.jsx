@@ -128,16 +128,30 @@ class Dashboard extends Component {
                     </Card>
                         </Col>
                     </Row>
+                    <Row style={{margin: "10px"}}>
+                        <Col>
+                            <Card>
+                            <Card.Body>
+                                <Card.Title>Current User Habits</Card.Title>
+                                <Card.Text>
+                                </Card.Text>
+                                <HabitList habits={this.state.habits} delHabit={this.delHabit}/>
+                            </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card>
+                                <Card.Body>
+                                <Card.Text>
+                                    <Card.Title>Current User Entries</Card.Title>
+                                    <Card.Text> </Card.Text>
+                                    <EntryList entries={this.state.entries} delEntry={this.delEntry} />
+                                </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
                 </div>
-                    <Card>
-                        <Card.Header>Current Habits</Card.Header>
-                        <Card.Body>
-                            <Card.Title>Current User Habits</Card.Title>
-                            <Card.Text>
-                            </Card.Text>
-                            <HabitList habits={this.state.habits} delHabit={this.delHabit}/>
-                        </Card.Body>
-                        </Card>
  
 
 
