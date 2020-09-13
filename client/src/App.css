@@ -43,7 +43,8 @@
 }
 
 .text {
-  color:#282c34;
+  /* color:#282c34; */
+  color:#485456;
   text-align: center;
   text-justify: auto;
   font-size: 1.2em;
