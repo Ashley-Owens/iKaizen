@@ -49,13 +49,13 @@ function Home() {
     <NavBar/>
 
     <Container>
-      <div className="flex-grow-1 home-content-container pt-5">
+      <div className="flex-grow-1 home-content-container pt-5 nav-padding">
         <div className="home-content pt-1">
           <div className="text-center">
           <img className="logo" src={process.env.PUBLIC_URL + '/img/logo.png'} alt="logo" />
           </div>
           
-          <p className="text px-5">iKaizen is a web application that helps its users implement kaizen philosophy for healthier lifestyles. Kaizen teaches that small and steady changes over time yield remarkable results. Are you ready to take the first step? </p>
+          <p className="text px-5">iKaizen is a web application that helps its users implement kaizen philosophy for healthier lifestyles and personal growth. Kaizen teaches that small and steady changes over time yield remarkable results. Are you ready to take the first step? </p>
         </div>
       </div> 
       <Footer />
