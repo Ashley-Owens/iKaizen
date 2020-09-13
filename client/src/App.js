@@ -10,14 +10,15 @@ import {Container} from 'react-bootstrap';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import Footer from './components/Footer';
+import Dashboard from './components/dashboard/Dashboard';
 import Dashboard2 from './components/dashboard/Dashboard2';
 import About from './components/About';
 import LogIn from './components/LogIn';
 import './App.css';
+import useElementHeight from "./hooks/useElementHeight";
 
 
 export default function App() {
-  
   return (
     <Router>
       <Switch>
@@ -31,37 +32,47 @@ export default function App() {
           <About />
         </Route>
         <Route path="/Dashboard" exact>
-          <Dashboard2 /> 
+          <Dashboard />
         </Route>
         <Route path="/" exact>
           <Home />
         </Route>
       </Switch>
-  </Router>
+    </Router>
   );
 }
 
-
 function Home() {
+  const [navbarHeight, navbarRef] = useElementHeight();
+  const containerStyle = { marginTop: navbarHeight };
+
   return (
-    <div className="d-flex flex-column cover">
-    <NavBar/>
+    <>
+      <div className="d-flex flex-column cover">
+        <NavBar ref={navbarRef} />
+        <Container
+          style={containerStyle}
+          className="flex-grow-1 home-content-container pt-5"
+        >
+          <div className="home-content pt-2">
+            <div className="text-center">
+              <img
+                className="logo"
+                src={process.env.PUBLIC_URL + "/img/logo.png"}
+                alt="logo"
+              />
+            </div>
 
-    <Container>
-      <div className="flex-grow-1 home-content-container pt-5 nav-padding">
-        <div className="home-content pt-2">
-          <div className="text-center">
-          <img className="logo" src={process.env.PUBLIC_URL + '/img/logo.png'} alt="logo" />
+            <p className="home-text pt-2 px-5">
+              iKaizen is a web application that helps its users implement kaizen
+              philosophy for personal growth and healthy lifestyle changes.
+              Kaizen teaches that small and steady changes over time yield
+              remarkable results. Are you ready to take the first step?{" "}
+            </p>
           </div>
-          
-          <p className="home-text pt-2 px-5">iKaizen is a web application that helps its users implement kaizen philosophy for personal growth and healthy lifestyle changes. Kaizen teaches that small and steady changes over time yield remarkable results. Are you ready to take the first step? </p>
-
-          
-
-        </div>
-      </div> 
+        </Container>
+      </div>
       <Footer />
-    </Container>
-    </div>
-  )
+    </>
+  );
 }
