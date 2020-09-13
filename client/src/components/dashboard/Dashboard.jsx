@@ -102,7 +102,7 @@ class Dashboard extends Component {
                 <NavBar />
                 <div>
 
-                <div className="bg-light px-4 py-2 font-weight-bold">Enter A New Habit</div>
+                <div className="bg-light card-header">Enter A New Habit</div>
                     <Row>
                         <Col>
                         <Card>
