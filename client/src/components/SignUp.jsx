@@ -39,7 +39,7 @@ function SignUp() {
       password: values.password,
     });
 
-    const url = "http://localhost:3001/users/my/session";
+    const url = "https://api-ikaizen.herokuapp.com/api/users/my/session";
     mutate(url);
 
     if (!error) {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const root = "http://localhost:3001/users";
+const root = "https://api-ikaizen.herokuapp.com/api/users";
 
 const login = async (username, password) => {
   try {
