@@ -47,7 +47,7 @@ function LogIn() {
   return (
     <>
       <NavBar />
-      <Container className="pt-5">
+      <Container className="pt-5 nav-padding">
         <Formik
           validationSchema={schema}
           onSubmit={handleSubmit}

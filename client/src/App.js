@@ -10,7 +10,7 @@ import {Container} from 'react-bootstrap';
 import NavBar from './components/NavBar';
 import SignUp from './components/SignUp';
 import Footer from './components/Footer';
-import Dashboard from './components/dashboard/Dashboard';
+import Dashboard2 from './components/dashboard/Dashboard2';
 import About from './components/About';
 import LogIn from './components/LogIn';
 import './App.css';
@@ -31,7 +31,7 @@ export default function App() {
           <About />
         </Route>
         <Route path="/Dashboard" exact>
-          <Dashboard /> 
+          <Dashboard2 /> 
         </Route>
         <Route path="/" exact>
           <Home />

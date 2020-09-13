@@ -5,7 +5,11 @@
 }
 
 .nav-padding {
+<<<<<<< HEAD
   margin-top: 23px;
+=======
+  margin-top: 25px;
+>>>>>>> origin/ashley
 }
 
 .modal-backdrop {
@@ -37,8 +41,7 @@
 }
 
 .home-text {
-  /* color:#282c34; */
-  color:#485456;
+  color: #1A1F24;
   text-align: center;
   text-justify: auto;
   font-size: 1.2em;
