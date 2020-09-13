@@ -1,4 +1,6 @@
 const Habit = require("../../models/habit");
+const Entry = require("../../models/entry");
+const User = require("../../models/user");
 const fakeHabits = require("./fakeHabits");
 const usersHelper = require("../users/helper");
 
@@ -6,6 +8,13 @@ const initialHabits = () => {
   return fakeHabits.map((habit) => {
     return { ...habit };
   });
+};
+
+const initialCreatedHabits = () => {
+  const habits = initialHabits();
+  const longTermHabits = habits.filter((habit) => habit.isLongTerm);
+
+  return longTermHabits;
 };
 
 const insertInitialHabits = async () => {
@@ -50,7 +59,8 @@ const nonExistentId = async () => {
 
 const deleteAll = async () => {
   await Habit.deleteMany({});
-  await usersHelper.deleteAll();
+  await Entry.deleteMany({});
+  await User.deleteMany({});
 };
 
 const habitsInDb = async () => {
@@ -58,7 +68,11 @@ const habitsInDb = async () => {
   return habits.map((habit) => habit.toJSON());
 };
 
-const habitInDb = async () => {
+const habitInDb = async (id) => {
+  if (id) {
+    return await Habit.findById(id);
+  }
+
   const user = await usersHelper.userInDb();
   return await Habit.findOne({ user: user._id });
 };
@@ -96,4 +110,5 @@ module.exports = {
   habitInDb,
   editHabit,
   deleteHabit,
+  initialCreatedHabits,
 };

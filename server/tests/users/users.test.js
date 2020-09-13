@@ -4,6 +4,7 @@ const app = require("../../app");
 
 const api = supertest(app);
 const helper = require("./helper");
+const bcrypt = require("bcrypt");
 
 beforeEach(async () => {
   await helper.deleteAll();
@@ -93,6 +94,7 @@ describe("editing users", () => {
       lastName: "new last name",
       email: "newemail@gmail.com",
       appleId: "abcde",
+      password: "supersecretandsecurepassword",
     };
     const properties = Object.keys(edits);
 
@@ -110,7 +112,12 @@ describe("editing users", () => {
         const userInDb = await helper.userInDb();
 
         for (let [editProperty, editValue] of Object.entries(editCombination)) {
-          expect(userInDb[editProperty]).toBe(editValue);
+          if (editProperty === "password") {
+            const same = await bcrypt.compare(editValue, userInDb.passwordHash);
+            expect(same).toBe(true);
+          } else {
+            expect(userInDb[editProperty]).toBe(editValue);
+          }
         }
       }
     }
@@ -141,18 +148,13 @@ describe("editing users", () => {
       lastName: "new last name",
       email: "newemail@gmail.com",
       appleId: "abcde",
+      password: "newpassword",
     };
 
     const responseBody = await helper.editUser(api, null, userEdit, 401);
     expect(responseBody.error).toBeDefined();
   });
 });
-
-// describe("getting entries belonging to a logged in user", async () => {
-//     test("returns the current month's entries by default when there are no query parameters", async () => {
-
-//     });
-// });
 
 describe("user login", () => {
   test("works when the user provides valid credentials", async () => {

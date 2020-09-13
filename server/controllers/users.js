@@ -4,6 +4,7 @@ const validator = require("validator");
 const passport = require("passport");
 const loginRequired = require("../middleware/loginRequired");
 const checkForCredentials = require("../utils/checkForCredentials");
+const getWeekday = require("../utils/getWeekday");
 const User = require("../models/user");
 const Entry = require("../models/entry");
 const Habit = require("../models/habit");
@@ -74,80 +75,87 @@ usersRouter.put("/myself", loginRequired, async (req, res) => {
 });
 
 usersRouter.get("/my/entries", loginRequired, async (req, res) => {
-  console.log(req.query);
-
   if (Object.keys(req.query).length === 0) {
     return res.status(400).json({ error: "No date query entered" });
   }
 
-  const { year, month, day, view = "weekly" } = req.query;
-
-  if (!year && !month) {
-    return res.status(400).json({ error: "Invalid date query" });
-  }
-
-  // editing in progress
+  const { year, month, day, view } = req.query;
 
   const userID = req.user._id;
-  const date = new Date();
-  const currentMonth = date.getMonth();
-  const currentYear = date.getFullYear();
 
-  try {
-    if (view === "weekly") {
-      const firstDayofWeek = new Date();
-      const lastDayofWeek = new Date();
-      const firstDayofWeekOffset =
-        24 * 60 * 60 * 1000 * firstDayofWeek.currentDay();
-      const lastDayofWeekOffset =
-        24 * 60 * 60 * 1000 * (6 - firstDayofWeek.currentDay());
-      firstDayofWeek.setTime(firstDayofWeek.getTime() - firstDayofWeekOffset);
-      lastDayofWeek.setTime(lastDayofWeek.getTime() + lastDayofWeekOffset);
+  if (view === "weekly") {
+    const firstDayOfCurrentWeek = getWeekday({ day: 0, atMidnight: true });
+    const firstDayOfNextWeek = getWeekday({ day: 7, atMidnight: true });
 
-      var weekEntries = await Entry.find({
-        user: userID,
-        date: { $gte: firstDayofWeek, $lte: lastDayofWeek },
-      });
-      res.json(weekEntries);
-    } else if (view === "monthly") {
-      var monthEntries = await Entry.find({
-        user: userID,
-        date: { $gte: new Date(currentYear, currentMonth, 1), $lte: date },
-      });
-      res.json(monthEntries);
-    } else {
-      //checking when year or month is not provided:
-      if (!year || !month) {
-        res.status(400).json({ error: "Invalid date query" });
-      }
-      //case when year and month are provided but not the day
-      else if (!day) {
-        var dateFormat = year + "-" + month + "-1";
-        if (validator.isDate(dateFormat[new Date()])) {
-          var searchEntriesNoDay = await Entry.find({
-            user: userID,
-            date: { $gte: new Date(year, month, 1), $lte: date },
-          });
-          res.json(searchEntriesNoDay);
-        } else {
-          res.status(400).json({ error: "Invalid date query" });
-        }
-        //case when year, month and day are provided
-      } else {
-        var dateFormat = year + "-" + month + "-" + day;
-        if (validator.isDate(dateFormat[new Date()])) {
-          var searchEntriesWithDay = await Entry.find({
-            user: userID,
-            date: { $gte: new Date(year, month, day), $lte: date },
-          });
-          res.json(searchEntriesWithDay);
-        } else {
-          res.status(400).json({ error: "Invalid date query" });
-        }
-      }
+    var weekEntries = await Entry.find({
+      user: userID,
+      date: { $gte: firstDayOfCurrentWeek, $lt: firstDayOfNextWeek },
+    }).populate("habitsSelected", "-user -entries");
+
+    return res.json(weekEntries);
+  } else if (view === "monthly") {
+    const firstDayOfMonth = new Date();
+    firstDayOfMonth.setDate(1);
+    firstDayOfMonth.setHours(0, 0, 0, 0);
+
+    const tomorrow = new Date();
+    tomorrow.setDate(new Date().getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+
+    var monthEntries = await Entry.find({
+      user: userID,
+      date: { $gte: firstDayOfMonth, $lt: tomorrow },
+    }).populate("habitsSelected", "-user -entries");
+
+    return res.json(monthEntries);
+  } else {
+    if (!year || !month) {
+      return res.status(400).json({ error: "Invalid date query" });
     }
-  } catch (error) {
-    res.status(500).json({ error: "Unknown server error" });
+
+    const monthIndex = Number(month) - 1;
+
+    if (!day) {
+      if (validator.isDate(`${year}/${month}/01`)) {
+        var searchEntriesNoDay = await Entry.find({
+          user: userID,
+          date: {
+            $gte: new Date(year, monthIndex, 1),
+            $lt: new Date(year, month, 1),
+          },
+        }).populate("habitsSelected", "-user -entries");
+
+        if (searchEntriesNoDay.length === 0) {
+          return res
+            .status(404)
+            .json({ error: "No entries exist in the specified month" });
+        }
+
+        return res.json(searchEntriesNoDay);
+      }
+
+      return res.status(400).json({ error: "Invalid date query" });
+    }
+
+    if (validator.isDate(`${year}/${month}/${day}`)) {
+      var searchEntriesWithDay = await Entry.findOne({
+        user: userID,
+        date: {
+          $gte: new Date(year, monthIndex, day),
+          $lt: new Date(year, monthIndex, day + 1),
+        },
+      }).populate("habitsSelected", "-user -entries");
+
+      if (!searchEntriesWithDay) {
+        return res
+          .status(404)
+          .json({ error: "No entry exists on the specified day" });
+      }
+
+      return res.json(searchEntriesWithDay);
+    } else {
+      return res.status(400).json({ error: "Invalid date query" });
+    }
   }
 });
 
@@ -163,16 +171,16 @@ usersRouter.post("/my/habits", loginRequired, async (req, res) => {
 
   const { name, isBinary } = req.body;
 
-  if (!name && !isBinary) {
+  if (!name || (!isBinary && typeof isBinary !== "boolean")) {
     return res
       .status(400)
       .json({ error: "Name or isBinary not given in request" });
   }
 
-  const habit = { user: req.user._id };
+  const habit = { user: req.user._id, name, isBinary };
 
-  if (name) habit.name = name;
-  if (typeof isBinary === "boolean") habit.isBinary = isBinary;
+  // if (name) habit.name = name;
+  // if (typeof isBinary === "boolean") habit.isBinary = isBinary;
 
   try {
     if (!isReoccurring) {
