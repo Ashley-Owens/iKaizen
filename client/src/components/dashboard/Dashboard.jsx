@@ -11,36 +11,11 @@ import EntryList from './EntryList';
 import Footer from '../Footer';
 import withRouteProtection from '../auth/withRouteProtection';
 
-class Dashboard extends Component {
-  state = {
-    habits: [
-      {
-        name: "This is habit 1",
-        progress: 50,
-        date: "10/24/1999",
-        isBinary: false,
-        isAsrchived: false,
-        id: 1,
-      },
-      {
-        name: "This is habit 2",
-        progress: 75,
-        date: "10/24/2000",
-        isBinary: true,
-        isAsrchived: false,
-        id: 2,
-      },
-      {
-        name: "This is habit 3",
-        progress: 100,
-        date: "10/24/2001",
-        isBinary: false,
-        isAsrchived: true,
-        id: 3,
-      },
-    ],
-  };
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Card, Button, Row, Col} from 'react-bootstrap';
+import '../../App.css';
 
+class Dashboard extends Component {
     constructor() {
         super();
         /*
@@ -106,8 +81,9 @@ class Dashboard extends Component {
         this.setState({habits: [...this.state.habits.filter(habit => habit.id !== id)]});
     }
 
+
     delEntry = (user) => {
-        //axios.delete('/api/users/' + id);
+        //axios.delete('/api/users/' + user);
         this.setState({entries: [...this.state.entries.filter(entry => entry.user !== user)]});
     }
 
@@ -119,18 +95,61 @@ class Dashboard extends Component {
 
     render() {
         return(
-            <div>
+            <div className="pt-5 nav-padding">
                 <NavBar />
-                <button onClick={this._displayHabitForm}>Add a New Habit</button>
-                { this.state.displayFormHabit && <CreateHabit />}
-                <HabitList habits={this.state.habits} delHabit={this.delHabit}/>
-                <hr></hr>
+                <div>
 
-                <EntryList entries={this.state.entries} delEntry={this.delEntry}/>
+                <div className="bg-light px-4 py-2 font-weight-bold">Enter A New Habit</div>
+                    <Row>
+                        <Col>
+                        <Card>
+                        <Card.Body>
+                            <Card.Title>Create your own</Card.Title>
+                            <Card.Text>
+                            Add to your list of tracked habits by creating your own.
+                            </Card.Text>
+                            <CreateHabit />
+                        </Card.Body>
+                        </Card>
+                        </Col>
+                        <Col>
+                        <Card>
+                        <Card.Body>
+                            <Card.Title>Choose A Habit</Card.Title>
+                            <Card.Text>
+                            Add to your list of tracked habits by choosing from a list.
+                            </Card.Text>
+                            <CreateHabit />
+                        </Card.Body>
+                    </Card>
+                        </Col>
+                    </Row>
+                </div>
+                    <Card>
+                        <Card.Header>Current Habits</Card.Header>
+                        <Card.Body>
+                            <Card.Title>Special title treatment</Card.Title>
+                            <Card.Text>
+                            With supporting text below as a natural lead-in to additional content.
+                            </Card.Text>
+                            <Button variant="primary">Go somewhere</Button>
+                        </Card.Body>
+                        </Card>
+ 
+
+
+                        {/* <button onClick={this._displayHabitForm}>Add a New Habit</button>
+                        { this.state.displayFormHabit && <CreateHabit />}
+                        <HabitList habits={this.state.habits} delHabit={this.delHabit}/>
+                        <hr></hr>
+
+                        <EntryList entries={this.state.entries} delEntry={this.delEntry}/>
+                    </div> */}
+                    
                 <Footer />
             </div>
         );
     }
 }
 
-export default withRouteProtection(Dashboard, { redirectTo: "/about" });
+export default /*withRouteProtection(*/Dashboard/*, { redirectTo: "/about" });*/

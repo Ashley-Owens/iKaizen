@@ -17,8 +17,8 @@ class CreateHabit extends Component {
             "name": this.state.name,
             "isBinary": this.state.isBinary
         }
-        axios.post('/api/users/my/habit', payload)
-        .then()
+        /*axios.post('/api/users/my/habit', payload)
+        .then() */
     }
 
     buttonChange = (e) => {
