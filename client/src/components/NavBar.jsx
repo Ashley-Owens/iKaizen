@@ -25,8 +25,4 @@ function NavBar() {
         </Navbar>
     )
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/ashley
 export default NavBar;

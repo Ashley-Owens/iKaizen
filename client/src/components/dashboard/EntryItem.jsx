@@ -1,23 +1,24 @@
 import React, {Component} from 'react';
 import Radium from 'radium'; //allows me to use the :hover style
 
-class HabitItem extends Component {
+class EntryItem extends Component {
     render() {
-        const {name, id} = this.props.habit;
+        const {emotions, user} = this.props.entry;
         return (
-            <div style={[habitStyle]}>
+            <div style={[entryStyle]}>
                 <p>
-                    {name}
-                    <button style={buttonStyle} onClick={this.props.delHabit.bind(this, id)}>Delete</button>
+                    
+                    {emotions}
+                    <button style={buttonStyle} onClick={this.props.delEntry.bind(this, user)}>Delete</button>
                 </p>
             </div>
         )
     }
 }
 
-HabitItem = Radium(HabitItem);
+EntryItem = Radium(EntryItem);
 
-var habitStyle = {
+var entryStyle = {
     backgroundColor: '#F5F5F5',
     padding: '10px',
     border: '1px dotted #BEBEBE',
@@ -38,4 +39,4 @@ const buttonStyle = {
 }
 
 
-export default HabitItem;
+export default EntryItem;
