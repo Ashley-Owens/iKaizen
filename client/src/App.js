@@ -50,13 +50,15 @@ function Home() {
 
     <Container>
       <div className="flex-grow-1 home-content-container pt-5 nav-padding">
-        <div className="home-content pt-1">
+        <div className="home-content pt-2">
           <div className="text-center">
           <img className="logo" src={process.env.PUBLIC_URL + '/img/logo.png'} alt="logo" />
           </div>
           
-          <p className="home-text px-5">iKaizen is a web application that helps its users implement kaizen philosophy for personal growth and healthier lifestyles. Kaizen teaches that small and steady changes over time yield remarkable results. Are you ready to take your first step? </p>
+          <p className="home-text pt-2 px-5">iKaizen is a web application that helps its users implement kaizen philosophy for personal growth and healthier lifestyle changes. Kaizen teaches that small and steady changes over time yield remarkable results. Are you ready to take your first step? </p>
+
           
+
         </div>
       </div> 
       <Footer />
