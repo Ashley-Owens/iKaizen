@@ -1,5 +1,6 @@
 import React from 'react';
-import {NavItem, Nav, Container, Navbar} from 'react-bootstrap';
+import {Nav, Navbar} from 'react-bootstrap';
+
 
 
 function Footer () {
