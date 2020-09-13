@@ -5,6 +5,7 @@ import withRouteProtection from "../auth/withRouteProtection";
 
 
 import CreateHabit from './CreateHabit';
+import AddHabit from './AddHabit';
 import HabitList from './HabitList';
 
 import EntryList from "./EntryList";
@@ -102,7 +103,7 @@ class Dashboard extends Component {
                 <NavBar />
                 <div>
 
-                <div className="bg-light px-4 py-2 font-weight-bold">Enter A New Habit</div>
+                <div className="bg-light card-header">Enter A New Habit</div>
                     <Row>
                         <Col>
                         <Card>
@@ -111,7 +112,7 @@ class Dashboard extends Component {
                             <Card.Text>
                             Add to your list of tracked habits by creating your own.
                             </Card.Text>
-                            <CreateHabit />
+                            <AddHabit />
                         </Card.Body>
                         </Card>
                         </Col>
@@ -127,16 +128,30 @@ class Dashboard extends Component {
                     </Card>
                         </Col>
                     </Row>
+                    <Row style={{margin: "10px"}}>
+                        <Col>
+                            <Card>
+                            <Card.Body>
+                                <Card.Title>Current User Habits</Card.Title>
+                                <Card.Text>
+                                </Card.Text>
+                                <HabitList habits={this.state.habits} delHabit={this.delHabit}/>
+                            </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card>
+                                <Card.Body>
+                                <Card.Text>
+                                    <Card.Title>Current User Entries</Card.Title>
+                                    <Card.Text> </Card.Text>
+                                    <EntryList entries={this.state.entries} delEntry={this.delEntry} />
+                                </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
                 </div>
-                    <Card>
-                        <Card.Header>Current Habits</Card.Header>
-                        <Card.Body>
-                            <Card.Title>Current User Habits</Card.Title>
-                            <Card.Text>
-                            </Card.Text>
-                            <HabitList habits={this.state.habits} delHabit={this.delHabit}/>
-                        </Card.Body>
-                        </Card>
  
 
 
