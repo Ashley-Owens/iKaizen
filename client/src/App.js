@@ -60,7 +60,6 @@ function Home() {
       </div> 
       <Footer />
     </Container>
-    
     </div>
   )
 }
