@@ -12,6 +12,7 @@ import Footer from '../Footer';
 import withRouteProtection from '../auth/withRouteProtection';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Card, Button, Row, Col} from 'react-bootstrap';
 import '../../App.css';
 
 class Dashboard extends Component {
@@ -94,17 +95,58 @@ class Dashboard extends Component {
 
     render() {
         return(
-            <div>
+            <div className="pt-5 nav-padding">
                 <NavBar />
-                <div className="pt-5 nav-padding">
-                    <button onClick={this._displayHabitForm}>Add a New Habit</button>
-                    { this.state.displayFormHabit && <CreateHabit />}
-                    <HabitList habits={this.state.habits} delHabit={this.delHabit} editHabit={this.editHabit}/>
-                    <hr></hr>
+                <div>
 
-                    <EntryList entries={this.state.entries} delEntry={this.delEntry}/>
-                    <Footer />
+                <div className="bg-light px-4 py-2 font-weight-bold">Enter A New Habit</div>
+                    <Row>
+                        <Col>
+                        <Card>
+                        <Card.Body>
+                            <Card.Title>Create your own</Card.Title>
+                            <Card.Text>
+                            Add to your list of tracked habits by creating your own.
+                            </Card.Text>
+                            <CreateHabit />
+                        </Card.Body>
+                        </Card>
+                        </Col>
+                        <Col>
+                        <Card>
+                        <Card.Body>
+                            <Card.Title>Choose A Habit</Card.Title>
+                            <Card.Text>
+                            Add to your list of tracked habits by choosing from a list.
+                            </Card.Text>
+                            <CreateHabit />
+                        </Card.Body>
+                    </Card>
+                        </Col>
+                    </Row>
                 </div>
+                    <Card>
+                        <Card.Header>Current Habits</Card.Header>
+                        <Card.Body>
+                            <Card.Title>Special title treatment</Card.Title>
+                            <Card.Text>
+                            With supporting text below as a natural lead-in to additional content.
+                            </Card.Text>
+                            <Button variant="primary">Go somewhere</Button>
+                        </Card.Body>
+                        </Card>
+ 
+
+
+                        {/* <button onClick={this._displayHabitForm}>Add a New Habit</button>
+                        { this.state.displayFormHabit && <CreateHabit />}
+                        <HabitList habits={this.state.habits} delHabit={this.delHabit}/>
+                        <hr></hr>
+
+                        <EntryList entries={this.state.entries} delEntry={this.delEntry}/>
+                    </div> */}
+                    
+                <Footer />
             </div>
         );
     }
