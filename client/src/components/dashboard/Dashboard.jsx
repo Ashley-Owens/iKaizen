@@ -128,11 +128,10 @@ class Dashboard extends Component {
                     <Card>
                         <Card.Header>Current Habits</Card.Header>
                         <Card.Body>
-                            <Card.Title>Special title treatment</Card.Title>
+                            <Card.Title>Current User Habits</Card.Title>
                             <Card.Text>
-                            With supporting text below as a natural lead-in to additional content.
                             </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
+                            <HabitList habits={this.state.habits} delHabit={this.delHabit}/>
                         </Card.Body>
                         </Card>
  
