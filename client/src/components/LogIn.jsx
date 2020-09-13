@@ -33,7 +33,7 @@ function LogIn() {
       values.password
     );
 
-    const url = "https://api-ikaizen.herokuapp.com/api/users/my/session";
+    const url = "https://ikaizen-server.herokuapp.com/api/users/my/session";
     mutate(url);
 
     if (authenticated) {
