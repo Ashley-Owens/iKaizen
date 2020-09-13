@@ -22,7 +22,7 @@ const login = async (username, password) => {
 
 const register = async (userInfo) => {
   try {
-    await axios.post(`${root}`, { userInfo });
+    await axios.post(`${root}`, userInfo);
   } catch (err) {
     return { error: err.message };
   }
