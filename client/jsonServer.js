@@ -3,7 +3,6 @@ const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
 const session = require("express-session");
-// const cors = require("cors");
 const uid = require("uid");
 
 const users = {
@@ -29,7 +28,6 @@ const users = {
   },
 };
 
-// server.use(cors());
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
@@ -45,6 +43,19 @@ server.use(
     rolling: true,
   })
 );
+
+server.post("/users", (req, res) => {
+  const { firstName, lastName, username, email, password } = req.body;
+
+  if (users.username) {
+    return res.status(400).json({ error: "duplicate username" });
+  }
+
+  const user = { id: uid(), username, password };
+  users[username] = user;
+
+  res.status(201).json({ firstName, lastName, username, email, password });
+});
 
 server.post("/users/login", (req, res) => {
   let { username, password } = req.body;

@@ -20,6 +20,16 @@ const login = async (username, password) => {
   return { authenticated: true };
 };
 
+const register = async (userInfo) => {
+  try {
+    await axios.post(`${root}`, { userInfo });
+  } catch (err) {
+    return { error: err.message };
+  }
+
+  return {};
+};
+
 const logout = async () => {
   try {
     await axios.get(`${root}/logout`, { withCredentials: true });
@@ -28,4 +38,4 @@ const logout = async () => {
   }
 };
 
-export { login, logout };
+export { login, register, logout };

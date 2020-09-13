@@ -60,7 +60,7 @@ function LogIn() {
             password: "",
           }}
         >
-          {({ handleChange, handleSubmit, touched, errors }) => {
+          {({ handleChange, handleSubmit, values, touched, errors }) => {
             return (
               <Form noValidate onSubmit={handleSubmit}>
                 <p className="header-text">Please sign in to your account</p>
@@ -74,6 +74,7 @@ function LogIn() {
                     placeholder="Enter username"
                     onChange={handleChange}
                     isInvalid={touched.username && errors.username}
+                    value={values.username}
                     autoComplete="off"
                   />
                   <Form.Control.Feedback type="invalid">
@@ -89,6 +90,7 @@ function LogIn() {
                     placeholder="Password"
                     onChange={handleChange}
                     isInvalid={touched.password && errors.password}
+                    value={values.password}
                     autoComplete="off"
                   />
                   <Form.Control.Feedback type="invalid">

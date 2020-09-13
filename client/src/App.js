@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useHistory,
 } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container} from 'react-bootstrap';
-import NavBar from './components/NavBar';
-import SignUp from './components/SignUp';
-import Footer from './components/Footer';
-import Dashboard from './components/dashboard/Dashboard';
-import Dashboard2 from './components/dashboard/Dashboard2';
-import About from './components/About';
-import LogIn from './components/LogIn';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Alert, Container } from "react-bootstrap";
+import NavBar from "./components/NavBar";
+import SignUp from "./components/SignUp";
+import Footer from "./components/Footer";
+import Dashboard from "./components/dashboard/Dashboard";
+import Dashboard2 from "./components/dashboard/Dashboard2";
+import About from "./components/About";
+import LogIn from "./components/LogIn";
+import "./App.css";
 import useElementHeight from "./hooks/useElementHeight";
-
 
 export default function App() {
   return (
@@ -44,7 +44,25 @@ export default function App() {
 
 function Home() {
   const [navbarHeight, navbarRef] = useElementHeight();
+  const [fromSignup, setFromSignup] = useState(false);
   const containerStyle = { marginTop: navbarHeight };
+  const history = useHistory();
+
+  useEffect(() => {
+    const redirectedFromSignup =
+      history.location &&
+      history.location.state &&
+      history.location.state.fromSignup;
+
+    if (redirectedFromSignup) {
+      setFromSignup(true);
+
+      setTimeout(() => {
+        setFromSignup(false);
+        history.replace("/", {});
+      }, 8000);
+    }
+  }, [history]);
 
   return (
     <>
@@ -55,6 +73,12 @@ function Home() {
           className="flex-grow-1 home-content-container pt-5"
         >
           <div className="home-content pt-2">
+            {fromSignup ? (
+              <Alert variant="info">
+                {`You successfully created an account, ${history.location.state.firstName}! Log in to access your
+                dashboard.`}
+              </Alert>
+            ) : null}
             <div className="text-center">
               <img
                 className="logo"
