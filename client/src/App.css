@@ -37,7 +37,8 @@
 }
 
 .home-text {
-  color: #1A1F24;
+  /* color:#282c34; */
+  color: #485456;
   text-align: center;
   text-justify: auto;
   font-size: 1.2em;
@@ -54,7 +55,7 @@
 }
 
 .about-text {
-  color: #02899C;
+  color: #02899c;
   text-align: center;
   text-justify: auto;
   font-size: 1.2em;
@@ -86,4 +87,3 @@
   left: 50%;
   transform: translateX(-50%);
 }
-
