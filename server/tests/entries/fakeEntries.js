@@ -1,3 +1,5 @@
+const getWeekday = require("../../utils/getWeekday");
+
 const entries = [
   {
     emotions: ["happy", "sad", "glad"],
@@ -65,15 +67,31 @@ const entries = [
   },
   {
     emotions: ["happy", "sad", "glad"],
-    date: new Date(new Date().setHours(1)),
+    date: getWeekday({ day: 0, atMidnight: true }),
   },
   {
     emotions: ["happy", "sad", "glad"],
-    date: new Date(new Date().setHours(2)),
+    date: getWeekday({ day: 3, atMidnight: true }),
   },
   {
     emotions: ["happy", "sad", "glad"],
-    date: new Date(new Date().setHours(3)),
+    date: getWeekday({ day: 6, atMidnight: true }),
+  },
+  {
+    emotions: ["happy", "sad", "glad"],
+    date: getWeekday({ day: -7, atMidnight: true }),
+  },
+  {
+    emotions: ["happy", "sad", "glad"],
+    date: getWeekday({ day: -10, atMidnight: true }),
+  },
+  {
+    emotions: ["happy", "sad", "glad"],
+    date: getWeekday({ day: 7, atMidnight: true }),
+  },
+  {
+    emotions: ["happy", "sad", "glad"],
+    date: getWeekday({ day: 10, atMidnight: true }),
   },
 ];
 

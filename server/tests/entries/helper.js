@@ -1,3 +1,5 @@
+const Habit = require("../../models/habit");
+const User = require("../../models/user");
 const Entry = require("../../models/entry");
 const fakeEntries = require("./fakeEntries");
 const usersHelper = require("../users/helper");
@@ -32,13 +34,18 @@ const nonExistentId = async () => {
   return id;
 };
 
-const entryInDb = async () => {
+const entryInDb = async (id) => {
+  if (id) {
+    return await Entry.findById(id);
+  }
+
   return await Entry.findOne({ emotions: ["happy", "sad", "glad"] });
 };
 
 const deleteAll = async () => {
+  await Habit.deleteMany({});
   await Entry.deleteMany({});
-  await usersHelper.deleteAll();
+  await User.deleteMany({});
 };
 
 const entriesInDb = async () => {
@@ -62,7 +69,7 @@ const getEntry = async (api, sessionId, entryId, statusCode) => {
 const getEntriesByUser = async (api, sessionId, query, statusCode) => {
   const params = {};
 
-  const paramList = ["year", "month", "day"];
+  const paramList = ["year", "month", "day", "view"];
   for (let param of paramList) {
     if (query[param]) {
       params[param] = query[param];
@@ -79,11 +86,34 @@ const getEntriesByUser = async (api, sessionId, query, statusCode) => {
     request.query(params);
   }
 
-  // request.expect(statusCode);
+  request.expect(statusCode);
 
   const response = (await request).body;
-  // console.log(response);
   return response;
+};
+
+const editEntry = async (api, sessionId, entryId, entryEdit, statusCode) => {
+  const request = api.put(`/api/entries/${entryId}`);
+
+  if (sessionId) {
+    request.set("Cookie", `connect.sid=${sessionId}`);
+  }
+
+  request.send(entryEdit).expect(statusCode);
+
+  return (await request).body;
+};
+
+const deleteEntry = async (api, sessionId, entryId, statusCode) => {
+  const request = api.delete(`/api/entries/${entryId}`);
+
+  if (sessionId) {
+    request.set("Cookie", `connect.sid=${sessionId}`);
+  }
+
+  request.expect(statusCode);
+
+  return (await request).body;
 };
 
 module.exports = {
@@ -95,4 +125,6 @@ module.exports = {
   entryInDb,
   getEntry,
   getEntriesByUser,
+  editEntry,
+  deleteEntry,
 };

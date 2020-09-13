@@ -1,3 +1,5 @@
+const Habit = require("../../models/habit");
+const Entry = require("../../models/entry");
 const User = require("../../models/user");
 const {
   initialUsers,
@@ -49,6 +51,8 @@ const usersInDb = async () => {
 };
 
 const deleteAll = async () => {
+  await Habit.deleteMany({});
+  await Entry.deleteMany({});
   await User.deleteMany({});
 };
 
