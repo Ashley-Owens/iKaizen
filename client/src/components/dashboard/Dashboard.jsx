@@ -10,6 +10,34 @@ import EntryList from './EntryList';
 import Footer from '../Footer';
 
 class Dashboard extends Component {
+  state = {
+    habits: [
+      {
+        name: "This is habit 1",
+        progress: 50,
+        date: "10/24/1999",
+        isBinary: false,
+        isAsrchived: false,
+        id: 1,
+      },
+      {
+        name: "This is habit 2",
+        progress: 75,
+        date: "10/24/2000",
+        isBinary: true,
+        isAsrchived: false,
+        id: 2,
+      },
+      {
+        name: "This is habit 3",
+        progress: 100,
+        date: "10/24/2001",
+        isBinary: false,
+        isAsrchived: true,
+        id: 3,
+      },
+    ],
+  };
 
     constructor() {
         super();
@@ -103,4 +131,4 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+export default withRouteProtection(Dashboard, { redirectTo: "/about" });

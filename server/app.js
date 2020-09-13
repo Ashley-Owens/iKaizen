@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+const cors = require("cors");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const configurePassport = require("./config/passport");
@@ -19,6 +20,8 @@ mongoose.connect(env.MONGODB_URI, {
 });
 
 app.set("port", env.PORT || 3000);
+
+app.use(cors());
 
 // parse incoming request bodies formatted in JSON
 app.use(express.json());
@@ -50,5 +53,10 @@ app.use(passport.session());
 app.use("/api/users", usersRouter);
 app.use("/api/entries", entriesRouter);
 app.use("/api/habits", habitsRouter);
+
+// handle invalid routes
+app.use((req, res) => {
+  res.sendStatus(404);
+});
 
 module.exports = app;

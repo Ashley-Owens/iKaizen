@@ -9,6 +9,16 @@ const User = require("../models/user");
 const Entry = require("../models/entry");
 const Habit = require("../models/habit");
 
+usersRouter.get("/my/habits", loginRequired, async (req, res) => {
+  const user = await User.findById(req.user._id).populate("longTermHabits");
+  const habits = {
+    reoccurringHabits: user.reoccurringHabits,
+    longTermHabits: user.longTermHabits,
+  };
+
+  res.json(habits);
+});
+
 usersRouter.post("/", async (req, res) => {
   const { username, password, email, firstName, lastName } = req.body;
   const { credentialsProvided, message } = checkForCredentials(
