@@ -1,9 +1,13 @@
 import React from 'react';
 import {Button, Form, Container} from 'react-bootstrap'
+import NavBar from './NavBar';
+import Footer from './Footer';
 
 
 function LogIn () {
     return (
+        <>
+        <NavBar/>
         <Container className="pt-5">
             <Form>
                 <p className="header-text">Please sign in to your account</p>
@@ -23,7 +27,9 @@ function LogIn () {
                     Submit
                 </Button>
             </Form>
+            <Footer />
         </Container>
+    </>
     )
 }
 

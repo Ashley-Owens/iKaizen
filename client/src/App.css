@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .container {
   /* background-color: #282c34; */
   height: 70vh; 
@@ -7,6 +8,8 @@
   width: 100%;
 }
 
+=======
+>>>>>>> origin/ashley
 .modal-backdrop {
   background-color: black;
 }
@@ -30,18 +33,38 @@
 
 .cover {
   background-image: url("/img/colorfulBg.jpg");
-  height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center;  */
 }
 
 .logo {
-  font-size: 2rem;
-  color: #02899C;
-  text-align: center;
+  Height: 300px;
+  Width: 300px;
 }
+
+.text {
+  color:#282c34;
+  text-align: center;
+  text-justify: auto;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+/* .home-content-container {
+  position: relative;
+}
+<<<<<<< HEAD
+=======
+
+.home-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+} */
+>>>>>>> origin/ashley

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar, Nav, Form, Button} from 'react-bootstrap';
+import {Navbar, Nav, Button} from 'react-bootstrap';
 
 
 function NavBar() {
@@ -25,5 +25,8 @@ function NavBar() {
         </Navbar>
     )
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/ashley
 export default NavBar;
