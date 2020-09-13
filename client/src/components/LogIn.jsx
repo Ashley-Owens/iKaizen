@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import useElementHeight from "../hooks/useElementHeight";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { Button, Form, Container } from "react-bootstrap";
@@ -10,6 +11,9 @@ import Footer from "./Footer";
 import Spinner from "./auth/Spinner";
 
 function LogIn() {
+  const [navbarHeight, navbarRef] = useElementHeight();
+  const containerStyle = { marginTop: navbarHeight };
+
   const [authenticating, setAuthenticating] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const history = useHistory();
@@ -45,9 +49,9 @@ function LogIn() {
   }
 
   return (
-    <>
-      <NavBar />
-      <Container className="pt-5">
+    <div className="d-flex flex-column">
+      <NavBar ref={navbarRef} />
+      <Container style={containerStyle} className="pt-5 flex-grow-1">
         <Formik
           validationSchema={schema}
           onSubmit={handleSubmit}
@@ -101,9 +105,9 @@ function LogIn() {
             );
           }}
         </Formik>
-        <Footer />
       </Container>
-    </>
+      <Footer />
+    </div>
   );
 }
 export default LogIn;

@@ -8,8 +8,7 @@ import HabitList from "./HabitList";
 
 import EntryList from "./EntryList";
 
-import Footer from '../Footer';
-import withRouteProtection from '../auth/withRouteProtection';
+import Footer from "../Footer";
 
 class Dashboard extends Component {
   state = {
@@ -124,7 +123,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar className="navbar-container" />
         <button onClick={this._displayHabitForm}>Add a New Habit</button>
         {this.state.displayFormHabit && <CreateHabit />}
         <HabitList habits={this.state.habits} delHabit={this.delHabit} />
