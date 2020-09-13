@@ -35,7 +35,7 @@ function SignUp () {
                 <Form.Group controlId="formGridPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" />
-                        <small id="passwordHelpInline" class="text-muted">
+                        <small id="passwordHelpInline" className="text-muted">
                             Must be 8-20 characters long.
                         </small>
                 </Form.Group>
