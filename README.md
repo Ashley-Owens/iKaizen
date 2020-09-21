@@ -1,8 +1,8 @@
 # iKaizen
-A web application for tracking daily personal growth including goals, habits, and emotions.
+A web application built during the OSU fall hackathon (9/10/20 - 9/13/20) for tracking daily personal growth including goals, habits, and emotions.
 
 ## Inspiration
-Our inspiration came from the Japanese philosophy of kaizen. Kaizen philosophy teaches that continuous and incremental changes to behavior add up over time, creating substantial growth and lasting change. We aim to empower users to participate in their own personal growth and lifestyle changes.
+Our inspiration came from the Japanese philosophy kaizen. Kaizen philosophy teaches that continuous and incremental changes to behavior add up over time, creating substantial growth and lasting change. We aim to empower users to participate in their own personal growth and lifestyle changes.
 
 ## What it does
 iKiazen works by providing a platform for users to track their daily habits, goals, and moods over time. In an effort to understand why healthy habits are so easy one day, and out the window the next, we have brought human emotion into the kaizen equation. Even when experiencing temporary unpleasant moods, our graph features help you to view your overall growth and progress from a long-term perspective.
